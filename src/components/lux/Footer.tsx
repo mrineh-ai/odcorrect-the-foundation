@@ -27,7 +27,7 @@ export function Footer() {
       <div className="shell py-20 lg:py-28">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Logo width={150} className="mix-blend-screen" />
+            <Logo width={150}  />
             <p className="body-lux mt-8 max-w-sm">
               A luxury house devoted to timeless clothing, footwear and fragrance. Fewer
               products. Made to deserve their existence.

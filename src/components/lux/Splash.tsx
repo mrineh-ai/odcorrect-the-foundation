@@ -72,7 +72,7 @@ export function Splash() {
       />
       <div className="absolute inset-0 bg-ink/45" aria-hidden="true" />
       <div className="relative flex flex-col items-center gap-8 px-6 text-center animate-lux-fade">
-        <Logo width={340} priority className="max-w-[72vw] mix-blend-screen" />
+        <Logo width={340} priority className="max-w-[72vw]" />
         <p className="eyebrow-muted">Unlearn What&apos;s Right</p>
       </div>
       <button
