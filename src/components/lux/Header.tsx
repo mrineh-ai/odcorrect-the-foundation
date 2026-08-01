@@ -45,7 +45,7 @@ export function Header() {
     >
       <div className="shell flex items-center justify-between py-5">
         <Link to="/" aria-label="ODCORRECT home" className="shrink-0">
-          <Logo width={scrolled ? 92 : 110} priority className="mix-blend-screen transition-all duration-1000" />
+          <Logo width={scrolled ? 92 : 110} priority className="transition-all duration-1000" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-10 lg:flex">
