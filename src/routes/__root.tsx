@@ -11,26 +11,28 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Header } from "@/components/lux/Header";
+import { Footer } from "@/components/lux/Footer";
+import { Splash } from "@/components/lux/Splash";
+import { LuxCursor } from "@/components/lux/LuxCursor";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <main className="flex min-h-dvh items-center justify-center bg-ink px-6">
+      <div className="max-w-xl text-center">
+        <p className="eyebrow">Error 404</p>
+        <h1 className="display-xl mt-8 text-foreground">Nothing Here</h1>
+        <p className="body-lux mx-auto mt-8 max-w-md">
+          The page you are looking for has been moved, retired, or never existed. Some
+          things are best left unmade.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
+        <div className="mt-14">
+          <Link to="/" className="btn-lux">
+            Return to the House
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -42,33 +44,29 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+    <main className="flex min-h-dvh items-center justify-center bg-ink px-6">
+      <div className="max-w-xl text-center">
+        <p className="eyebrow">Interruption</p>
+        <h1 className="display-lg mt-8 text-foreground">This page didn&apos;t load</h1>
+        <p className="body-lux mx-auto mt-8 max-w-md">
+          Something went wrong on our end. Please try again, or return to the house.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-14 flex flex-wrap justify-center gap-4">
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-lux"
           >
-            Try again
+            Try Again
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
+          <a href="/" className="btn-lux-gold">
+            Go Home
           </a>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -77,21 +75,43 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "ODCORRECT — Luxury Without Compromise" },
+      {
+        name: "description",
+        content:
+          "ODCORRECT is a luxury fashion house preparing a new standard of timeless clothing, footwear and fragrance.",
+      },
+      { name: "author", content: "ODCORRECT" },
+      { name: "theme-color", content: "#050505" },
+      { property: "og:site_name", content: "ODCORRECT" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@200;300;400&family=Mrs+Saint+Delafield&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "ODCORRECT",
+          description:
+            "A luxury fashion house devoted to timeless clothing, footwear and fragrance.",
+          slogan: "Luxury. Without Compromise.",
+          founder: { "@type": "Person", name: "Mrinal Gahlaut" },
+          email: "house@odcorrect.com",
+          areaServed: "Worldwide",
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -119,8 +139,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <Splash />
+      <LuxCursor />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[9999] focus:bg-charcoal focus:px-5 focus:py-3 focus:text-sm focus:text-gold"
+      >
+        Skip to content
+      </a>
+      <Header />
+      <div id="main">
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </div>
+      <Footer />
     </QueryClientProvider>
   );
 }
