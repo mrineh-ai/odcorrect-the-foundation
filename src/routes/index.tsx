@@ -7,7 +7,7 @@ import founderPortrait from "@/assets/founder-portrait.jpg";
 import { Reveal } from "@/components/lux/Reveal";
 import { DustField } from "@/components/lux/DustField";
 import { NotifyForm } from "@/components/lux/NotifyForm";
-import { Countdown } from "@/components/lux/Countdown";
+
 import { JournalCard } from "@/components/lux/JournalCard";
 import { JOURNAL_ENTRIES } from "@/data/journal";
 import { CATEGORIES } from "@/data/categories";
@@ -248,11 +248,11 @@ function Home() {
               <div className="glass-sheen overflow-hidden">
                 <img
                   src={founderPortrait}
-                  alt="Editorial portrait of the founder of ODCORRECT"
+                  alt="Editorial portrait of Mrinal Gahlaut, founder of ODCORRECT"
                   loading="lazy"
-                  width={1200}
-                  height={1504}
-                  className="img-zoom h-[520px] w-full object-cover lg:h-[720px]"
+                  width={719}
+                  height={1016}
+                  className="img-zoom h-[520px] w-full object-cover object-top lg:h-[720px]"
                 />
               </div>
             </Reveal>
@@ -292,8 +292,8 @@ function Home() {
 
               <div className="mt-14 border-t border-border pt-10">
                 <p
-                  className="text-5xl leading-none text-gold sm:text-6xl"
-                  style={{ fontFamily: "var(--font-script)" }}
+                  className="text-4xl leading-tight text-gold italic sm:text-5xl"
+                  style={{ fontFamily: "var(--font-display)", letterSpacing: "0.02em" }}
                 >
                   Mrinal Gahlaut
                 </p>
@@ -318,10 +318,7 @@ function Home() {
               audience, and without announcement elsewhere.
             </p>
           </Reveal>
-          <Reveal delay={160} className="mt-16">
-            <Countdown />
-          </Reveal>
-          <Reveal delay={240} className="mt-14">
+          <Reveal delay={160} className="mt-14">
             <Link to="/coming-soon" className="btn-lux-gold">
               Notify Me
             </Link>
