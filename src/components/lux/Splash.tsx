@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Logo } from "./Logo";
 
 const SESSION_KEY = "odcorrect:splash-seen";
 const MAX_DURATION = 7000;
@@ -73,14 +72,6 @@ export function Splash() {
           onEnded={dismiss}
           onError={dismiss}
         />
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-8 text-center animate-lux-fade">
-          <Logo
-            width={300}
-            priority
-            className="max-w-[62vw] drop-shadow-[0_0_40px_oklch(0.092_0_0_/_0.9)]"
-          />
-          <p className="eyebrow-muted">Unlearn What&apos;s Right</p>
-        </div>
       </div>
       <button
         type="button"

@@ -9,7 +9,9 @@ export function Footer() {
       <div className="shell py-20 lg:py-28">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Logo width={150}  />
+            <span className="inline-flex rounded-md bg-[oklch(1_0_0_/_0.94)] px-6 py-4 shadow-[0_0_40px_oklch(1_0_0_/_0.08)] ring-1 ring-[oklch(1_0_0_/_0.18)]">
+              <Logo width={150} />
+            </span>
             <p className="body-lux mt-8 max-w-sm">
               A luxury house devoted to timeless clothing, footwear and fragrance. Fewer
               products. Made to deserve their existence.
@@ -65,10 +67,10 @@ export function Footer() {
             <ul className="mt-7 space-y-4 text-sm font-light tracking-[0.14em] text-muted-foreground">
               <li>
                 <a
-                  href="mailto:house@odcorrect.com"
+                  href="mailto:ceo@odcorrect.in"
                   className="transition-colors duration-700 hover:text-gold"
                 >
-                  house@odcorrect.com
+                  ceo@odcorrect.in
                 </a>
               </li>
               <li>New Delhi &middot; India</li>
