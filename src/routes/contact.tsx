@@ -56,10 +56,10 @@ function Contact() {
                 <dt className="eyebrow-muted">General &amp; Press</dt>
                 <dd className="mt-3">
                   <a
-                    href="mailto:house@odcorrect.com"
+                    href="mailto:ceo@odcorrect.in"
                     className="text-lg font-light tracking-[0.1em] text-foreground transition-colors duration-700 hover:text-gold"
                   >
-                    house@odcorrect.com
+                    ceo@odcorrect.in
                   </a>
                 </dd>
               </div>

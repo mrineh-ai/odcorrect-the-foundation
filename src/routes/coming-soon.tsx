@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import categoryFragrance from "@/assets/category-fragrance.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
-import { Countdown } from "@/components/lux/Countdown";
+
 import { NotifyForm } from "@/components/lux/NotifyForm";
 import { DustField } from "@/components/lux/DustField";
 import { CATEGORIES } from "@/data/categories";
@@ -42,10 +42,7 @@ function ComingSoon() {
       <section className="section-pad relative overflow-hidden bg-background">
         <DustField />
         <div className="shell relative">
-          <Reveal>
-            <Countdown />
-          </Reveal>
-          <Reveal delay={160} className="mt-20 max-w-xl">
+          <Reveal className="max-w-xl">
             <p className="eyebrow">Notify Me</p>
             <h2 className="display-md mt-6 text-foreground">
               Be told first, and told quietly.

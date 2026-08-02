@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import splashAsset from "@/assets/odcorrect-splash.asset.json";
 import { Logo } from "./Logo";
 
 const SESSION_KEY = "odcorrect:splash-seen";
 const MAX_DURATION = 7000;
+const SPLASH_SRC = "/odcorrect-splash.mp4";
 
 /**
  * First experience: the brand splash film with the official logo centred.
@@ -40,6 +40,8 @@ export function Splash() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === "Enter") dismiss();
     };
+    // Some mobile browsers reject autoplay until nudged.
+    videoRef.current?.play().catch(() => {});
     window.addEventListener("keydown", onKey);
     return () => {
       window.clearTimeout(timer);
@@ -59,21 +61,26 @@ export function Splash() {
         transition: "opacity 1200ms cubic-bezier(0.16,1,0.3,1)",
       }}
     >
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
-        src={splashAsset.url}
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        onEnded={dismiss}
-        onError={dismiss}
-      />
-      <div className="absolute inset-0 bg-ink/45" aria-hidden="true" />
-      <div className="relative flex flex-col items-center gap-8 px-6 text-center animate-lux-fade">
-        <Logo width={340} priority className="max-w-[72vw]" />
-        <p className="eyebrow-muted">Unlearn What&apos;s Right</p>
+      <div className="relative flex w-full max-w-[1100px] items-center justify-center px-6">
+        <video
+          ref={videoRef}
+          className="h-auto max-h-[72vh] w-full object-contain"
+          src={SPLASH_SRC}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          onEnded={dismiss}
+          onError={dismiss}
+        />
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-8 text-center animate-lux-fade">
+          <Logo
+            width={300}
+            priority
+            className="max-w-[62vw] drop-shadow-[0_0_40px_oklch(0.092_0_0_/_0.9)]"
+          />
+          <p className="eyebrow-muted">Unlearn What&apos;s Right</p>
+        </div>
       </div>
       <button
         type="button"

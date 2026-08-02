@@ -28,19 +28,39 @@ export function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const { body } = document;
+    const scrollY = window.scrollY;
+    const prev = {
+      overflow: body.style.overflow,
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+    };
+    // iOS Safari ignores overflow:hidden on body — pin it instead.
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
     return () => {
-      document.body.style.overflow = "";
+      body.style.overflow = prev.overflow;
+      body.style.position = prev.position;
+      body.style.top = prev.top;
+      body.style.width = prev.width;
+      window.scrollTo(0, scrollY);
     };
   }, [open]);
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-[500] transition-all duration-1000"
+      className="fixed inset-x-0 top-0 z-[500] transition-all duration-700"
       style={{
-        backgroundColor: scrolled ? "oklch(0.092 0 0 / 0.86)" : "transparent",
-        backdropFilter: scrolled ? "blur(14px)" : "none",
-        borderBottom: scrolled ? "1px solid oklch(1 0 0 / 8%)" : "1px solid transparent",
+        backgroundColor: scrolled ? "oklch(0.092 0 0 / 0.55)" : "transparent",
+        backdropFilter: scrolled ? "blur(22px) saturate(180%)" : "none",
+        borderBottom: scrolled
+          ? "1px solid oklch(1 0 0 / 10%)"
+          : "1px solid transparent",
+        boxShadow: scrolled ? "inset 0 1px 0 0 oklch(1 0 0 / 6%)" : "none",
       }}
     >
       <div className="shell flex items-center justify-between py-5">
@@ -89,14 +109,29 @@ export function Header() {
 
       <div
         id="mobile-nav"
-        className="fixed inset-0 top-0 z-[490] flex flex-col justify-center bg-ink px-8 lg:hidden"
+        className="fixed inset-0 z-[600] flex h-[100dvh] w-screen flex-col justify-center overflow-y-auto overscroll-contain bg-ink px-8 py-24 lg:hidden"
         style={{
           opacity: open ? 1 : 0,
+          transform: open ? "translateY(0)" : "translateY(-8px)",
+          visibility: open ? "visible" : "hidden",
           pointerEvents: open ? "auto" : "none",
-          transition: "opacity 800ms cubic-bezier(0.16,1,0.3,1)",
+          transition:
+            "opacity 600ms cubic-bezier(0.16,1,0.3,1), transform 600ms cubic-bezier(0.16,1,0.3,1), visibility 600ms",
         }}
         aria-hidden={!open}
       >
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          aria-label="Close menu"
+          tabIndex={open ? 0 : -1}
+          className="absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground transition-colors duration-500 hover:text-gold"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
+            <path d="M5 5l14 14M19 5L5 19" />
+          </svg>
+        </button>
+
         <nav aria-label="Mobile" className="flex flex-col gap-7">
           {NAV.map((item) => (
             <Link
@@ -117,6 +152,7 @@ export function Header() {
           </Link>
         </div>
       </div>
+
     </header>
   );
 }
