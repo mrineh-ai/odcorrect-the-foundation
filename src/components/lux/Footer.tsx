@@ -9,9 +9,9 @@ export function Footer() {
       <div className="shell py-20 lg:py-28">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <span className="inline-flex rounded-md bg-[oklch(1_0_0_/_0.94)] px-6 py-4 shadow-[0_0_40px_oklch(1_0_0_/_0.08)] ring-1 ring-[oklch(1_0_0_/_0.18)]">
-              <Logo width={150} />
-            </span>
+            <div className="inline-flex">
+  <Logo width={150} />
+</div>
             <p className="body-lux mt-8 max-w-sm">
               A luxury house devoted to timeless clothing, footwear and fragrance. Fewer
               products. Made to deserve their existence.
