@@ -77,7 +77,7 @@ function Terms() {
               </Reveal>
             ))}
             <Reveal>
-              <p className="eyebrow-muted">Questions: house@odcorrect.com</p>
+              <p className="eyebrow-muted">Questions: ceo@odcorrect.in</p>
             </Reveal>
           </div>
         </div>

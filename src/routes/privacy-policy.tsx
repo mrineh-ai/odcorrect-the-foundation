@@ -44,7 +44,7 @@ const SECTIONS = [
   },
   {
     title: "Your Rights",
-    body: "You may request access to, correction of, or deletion of your personal information at any time by writing to house@odcorrect.com. Every unsubscribe request is honoured immediately.",
+    body: "You may request access to, correction of, or deletion of your personal information at any time by writing to ceo@odcorrect.in. Every unsubscribe request is honoured immediately.",
   },
   {
     title: "Changes",
@@ -75,7 +75,7 @@ function Privacy() {
             ))}
             <Reveal>
               <p className="eyebrow-muted">
-                Enquiries regarding this policy: house@odcorrect.com
+                Enquiries regarding this policy: ceo@odcorrect.in
               </p>
             </Reveal>
           </div>

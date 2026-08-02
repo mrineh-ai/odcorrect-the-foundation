@@ -108,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "A luxury fashion house devoted to timeless clothing, footwear and fragrance.",
           slogan: "Luxury. Without Compromise.",
           founder: { "@type": "Person", name: "Mrinal Gahlaut" },
-          email: "house@odcorrect.com",
+          email: "ceo@odcorrect.in",
           areaServed: "Worldwide",
         }),
       },
