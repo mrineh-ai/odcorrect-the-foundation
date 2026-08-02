@@ -36,11 +36,14 @@ export function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-[500] transition-all duration-1000"
+      className="fixed inset-x-0 top-0 z-[500] transition-all duration-700"
       style={{
-        backgroundColor: scrolled ? "oklch(0.092 0 0 / 0.86)" : "transparent",
-        backdropFilter: scrolled ? "blur(14px)" : "none",
-        borderBottom: scrolled ? "1px solid oklch(1 0 0 / 8%)" : "1px solid transparent",
+        backgroundColor: scrolled ? "oklch(0.092 0 0 / 0.55)" : "transparent",
+        backdropFilter: scrolled ? "blur(22px) saturate(180%)" : "none",
+        borderBottom: scrolled
+          ? "1px solid oklch(1 0 0 / 10%)"
+          : "1px solid transparent",
+        boxShadow: scrolled ? "inset 0 1px 0 0 oklch(1 0 0 / 6%)" : "none",
       }}
     >
       <div className="shell flex items-center justify-between py-5">
