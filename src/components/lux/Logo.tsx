@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/odcorrect-logo.asset.json";
+const LOGO_SRC = "/odcorrect-logo.png";
 
 const NATURAL_WIDTH = 1022;
 const NATURAL_HEIGHT = 603;
@@ -18,7 +18,7 @@ export function Logo({ className = "", width = 160, priority = false }: LogoProp
   const height = Math.round((width * NATURAL_HEIGHT) / NATURAL_WIDTH);
   return (
     <img
-      src={logoAsset.url}
+      src={LOGO_SRC}
       alt="ODCORRECT — Unlearn What's Right"
       width={width}
       height={height}
