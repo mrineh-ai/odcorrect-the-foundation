@@ -41,7 +41,11 @@ export function useTheme() {
       /* storage unavailable — theme still applies for this session */
     }
     setTheme(next);
-    window.dispatchEvent(new CustomEvent("odcorrect-theme", { detail: next }));
+    // async so sibling toggles update outside this render pass
+    setTimeout(
+      () => window.dispatchEvent(new CustomEvent("odcorrect-theme", { detail: next })),
+      0,
+    );
   }, []);
 
 
