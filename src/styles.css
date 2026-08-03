@@ -369,6 +369,20 @@ html.light {
   }
 }
 
+/* Sections that sit on dark imagery keep the dark palette in both themes. */
+@utility on-dark {
+  --background: oklch(0.092 0 0);
+  --foreground: oklch(0.966 0 0);
+  --charcoal: oklch(0.175 0 0);
+  --ink: oklch(0.092 0 0);
+  --card: oklch(0.175 0 0);
+  --gold: oklch(0.745 0.073 85.5);
+  --gold-dim: oklch(0.575 0.055 85.5);
+  --muted-foreground: oklch(0.633 0 0);
+  --border: oklch(1 0 0 / 12%);
+  color: var(--foreground);
+}
+
 @utility hairline-t {
   border-top: 1px solid var(--border);
 }
