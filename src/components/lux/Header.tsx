@@ -55,12 +55,14 @@ export function Header() {
     <header
       className="fixed inset-x-0 top-0 z-[500] transition-all duration-700"
       style={{
-        backgroundColor: scrolled ? "oklch(0.092 0 0 / 0.55)" : "transparent",
-        backdropFilter: scrolled ? "blur(22px) saturate(180%)" : "none",
-        borderBottom: scrolled
-          ? "1px solid oklch(1 0 0 / 10%)"
-          : "1px solid transparent",
-        boxShadow: scrolled ? "inset 0 1px 0 0 oklch(1 0 0 / 6%)" : "none",
+        backgroundColor: scrolled
+          ? "oklch(1 0 0 / 0.9)"
+          : "oklch(1 0 0 / 0.8)",
+        backdropFilter: "blur(22px) saturate(180%)",
+        borderBottom: "1px solid oklch(0 0 0 / 8%)",
+        boxShadow: scrolled
+          ? "0 1px 12px oklch(0 0 0 / 6%)"
+          : "0 1px 6px oklch(0 0 0 / 3%)",
       }}
     >
       <div className="shell flex items-center justify-between py-5">
@@ -70,9 +72,10 @@ export function Header() {
   className="shrink-0 transition-all duration-1000"
 >
   <Logo
-    width={scrolled ? 92 : 110}
+    width={scrolled ? 104 : 124}
     priority
     className="transition-all duration-1000"
+    style={{ filter: "contrast(1.12) saturate(1.08)" }}
   />
 </Link>
 
@@ -82,7 +85,8 @@ export function Header() {
               key={item.to}
               to={item.to}
               className="link-lux"
-              activeProps={{ style: { color: "var(--gold)" } }}
+              style={{ color: "oklch(0.24 0 0)" }}
+              activeProps={{ style: { color: "var(--gold-dim)" } }}
               activeOptions={{ exact: item.to === "/" }}
             >
               {item.label}
@@ -91,7 +95,11 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <Link to="/coming-soon" className="btn-lux-gold !px-7 !py-3">
+          <Link
+            to="/coming-soon"
+            className="btn-lux-gold !px-7 !py-3"
+            style={{ color: "var(--gold-dim)", borderColor: "var(--gold-dim)" }}
+          >
             Notify Me
           </Link>
         </div>
@@ -105,12 +113,12 @@ export function Header() {
           className="flex h-10 w-10 flex-col items-end justify-center gap-[7px] lg:hidden"
         >
           <span
-            className="block h-px bg-foreground transition-all duration-700"
-            style={{ width: open ? 24 : 28, transform: open ? "rotate(45deg) translateY(4px)" : "none" }}
+            className="block h-px transition-all duration-700"
+            style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 28, transform: open ? "rotate(45deg) translateY(4px)" : "none" }}
           />
           <span
-            className="block h-px bg-foreground transition-all duration-700"
-            style={{ width: open ? 24 : 18, transform: open ? "rotate(-45deg) translateY(-4px)" : "none" }}
+            className="block h-px transition-all duration-700"
+            style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 18, transform: open ? "rotate(-45deg) translateY(-4px)" : "none" }}
           />
         </button>
       </div>
