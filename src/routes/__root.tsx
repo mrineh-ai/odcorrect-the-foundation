@@ -15,6 +15,8 @@ import { Header } from "@/components/lux/Header";
 import { Footer } from "@/components/lux/Footer";
 import { Splash } from "@/components/lux/Splash";
 import { LuxCursor } from "@/components/lux/LuxCursor";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
+
 
 function NotFoundComponent() {
   return (
