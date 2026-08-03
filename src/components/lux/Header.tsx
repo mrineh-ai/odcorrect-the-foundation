@@ -96,7 +96,8 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-6 lg:flex">
+          <ThemeToggle />
           <Link
             to="/coming-soon"
             className="btn-lux-gold !px-7 !py-3"
@@ -106,23 +107,27 @@ export function Header() {
           </Link>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-10 w-10 flex-col items-end justify-center gap-[7px] lg:hidden"
-        >
-          <span
-            className="block h-px transition-all duration-700"
-            style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 28, transform: open ? "rotate(45deg) translateY(4px)" : "none" }}
-          />
-          <span
-            className="block h-px transition-all duration-700"
-            style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 18, transform: open ? "rotate(-45deg) translateY(-4px)" : "none" }}
-          />
-        </button>
+        <div className="flex items-center gap-4 lg:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="flex h-10 w-10 flex-col items-end justify-center gap-[7px]"
+          >
+            <span
+              className="block h-px transition-all duration-700"
+              style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 28, transform: open ? "rotate(45deg) translateY(4px)" : "none" }}
+            />
+            <span
+              className="block h-px transition-all duration-700"
+              style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 18, transform: open ? "rotate(-45deg) translateY(-4px)" : "none" }}
+            />
+          </button>
+        </div>
+
       </div>
 
       <div
