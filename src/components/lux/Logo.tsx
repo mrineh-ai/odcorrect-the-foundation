@@ -8,13 +8,14 @@ interface LogoProps {
   /** Rendered width in px — proportions are always preserved. */
   width?: number;
   priority?: boolean;
+  style?: React.CSSProperties;
 }
 
 /**
  * The official ODCORRECT logo, used exactly as provided.
  * Never recreated, traced or restyled — only scaled proportionally.
  */
-export function Logo({ className = "", width = 160, priority = false }: LogoProps) {
+export function Logo({ className = "", width = 160, priority = false, style }: LogoProps) {
   const height = Math.round((width * NATURAL_HEIGHT) / NATURAL_WIDTH);
   return (
     <img
@@ -25,7 +26,7 @@ export function Logo({ className = "", width = 160, priority = false }: LogoProp
       loading={priority ? "eager" : "lazy"}
       decoding={priority ? "sync" : "async"}
       className={className}
-      style={{ width, height: "auto" }}
+      style={{ width, height: "auto", ...style }}
     />
   );
 }
