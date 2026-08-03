@@ -26,6 +26,9 @@ export function useTheme() {
     const next = readTheme();
     setTheme(next);
     applyTheme(next);
+    const onChange = (e: Event) => setTheme((e as CustomEvent<Theme>).detail);
+    window.addEventListener("odcorrect-theme", onChange);
+    return () => window.removeEventListener("odcorrect-theme", onChange);
   }, []);
 
   const toggle = useCallback(() => {
@@ -37,9 +40,11 @@ export function useTheme() {
       } catch {
         /* storage unavailable — theme still applies for this session */
       }
+      window.dispatchEvent(new CustomEvent("odcorrect-theme", { detail: next }));
       return next;
     });
   }, []);
+
 
   return { theme, toggle };
 }
