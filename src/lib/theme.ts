@@ -32,17 +32,16 @@ export function useTheme() {
   }, []);
 
   const toggle = useCallback(() => {
-    setTheme((prev) => {
-      const next: Theme = prev === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try {
-        window.localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        /* storage unavailable — theme still applies for this session */
-      }
-      window.dispatchEvent(new CustomEvent("odcorrect-theme", { detail: next }));
-      return next;
-    });
+    const next: Theme =
+      document.documentElement.classList.contains("light") ? "dark" : "light";
+    applyTheme(next);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      /* storage unavailable — theme still applies for this session */
+    }
+    setTheme(next);
+    window.dispatchEvent(new CustomEvent("odcorrect-theme", { detail: next }));
   }, []);
 
 
