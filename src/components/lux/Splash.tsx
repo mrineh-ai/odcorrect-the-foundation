@@ -54,7 +54,7 @@ export function Splash() {
     <div
       role="presentation"
       aria-label="ODCORRECT introduction"
-      className="fixed inset-0 z-[10000] flex items-center justify-center bg-ink"
+      className="on-dark fixed inset-0 z-[10000] flex items-center justify-center bg-ink"
       style={{
         opacity: leaving ? 0 : 1,
         transition: "opacity 1200ms cubic-bezier(0.16,1,0.3,1)",

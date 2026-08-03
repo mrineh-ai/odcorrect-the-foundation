@@ -15,6 +15,8 @@ import { Header } from "@/components/lux/Header";
 import { Footer } from "@/components/lux/Footer";
 import { Splash } from "@/components/lux/Splash";
 import { LuxCursor } from "@/components/lux/LuxCursor";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
+
 
 function NotFoundComponent() {
   return (
@@ -75,21 +77,65 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ODCORRECT — Luxury Without Compromise" },
+      {
+        title:
+          "ODCORRECT | Luxury Fashion House | Clothing, Footwear & Fragrance",
+      },
       {
         name: "description",
         content:
-          "ODCORRECT is a luxury fashion house preparing a new standard of timeless clothing, footwear and fragrance.",
+          "ODCORRECT is a premium luxury fashion house crafting timeless clothing, footwear and fragrances through exceptional craftsmanship, modern design and uncompromising quality.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Luxury Fashion, Premium Clothing, Luxury Shoes, Luxury Fragrance, Designer Fashion, Premium Apparel, Luxury Lifestyle, ODCORRECT, Mrinal Gahlaut, Indian Luxury Brand, Fashion House",
       },
       { name: "author", content: "ODCORRECT" },
-      { name: "theme-color", content: "#050505" },
+      { name: "robots", content: "index, follow" },
+      {
+        name: "theme-color",
+        content: "#050505",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        name: "theme-color",
+        content: "#FAF8F5",
+        media: "(prefers-color-scheme: light)",
+      },
       { property: "og:site_name", content: "ODCORRECT" },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "ODCORRECT | Luxury Fashion House" },
+      {
+        property: "og:description",
+        content:
+          "Luxury clothing, footwear and fragrance crafted for timeless elegance.",
+      },
+      { property: "og:url", content: "https://odcorrect.in/" },
+      {
+        property: "og:image",
+        content: "https://odcorrect.in/odcorrect-logo.png",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "ODCORRECT | Luxury Fashion House" },
+      {
+        name: "twitter:description",
+        content:
+          "Luxury clothing, footwear and fragrance crafted for timeless elegance.",
+      },
+      {
+        name: "twitter:image",
+        content: "https://odcorrect.in/odcorrect-logo.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "preload", as: "image", href: "/odcorrect-logo.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -98,19 +144,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
+      { children: THEME_INIT_SCRIPT },
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "ODCORRECT",
-          description:
-            "A luxury fashion house devoted to timeless clothing, footwear and fragrance.",
-          slogan: "Luxury. Without Compromise.",
-          founder: { "@type": "Person", name: "Mrinal Gahlaut" },
-          email: "ceo@odcorrect.in",
-          areaServed: "Worldwide",
-        }),
+        children: JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "ODCORRECT",
+            url: "https://odcorrect.in",
+            logo: "https://odcorrect.in/odcorrect-logo.png",
+            description:
+              "A luxury fashion house devoted to timeless clothing, footwear and fragrance.",
+            slogan: "Luxury. Without Compromise.",
+            founder: { "@type": "Person", name: "Mrinal Gahlaut" },
+            email: "ceo@odcorrect.in",
+            areaServed: "Worldwide",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "ODCORRECT",
+            url: "https://odcorrect.in",
+            inLanguage: "en",
+            publisher: { "@type": "Organization", name: "ODCORRECT" },
+          },
+        ]),
       },
     ],
   }),
@@ -122,7 +181,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
@@ -133,6 +192,7 @@ function RootShell({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();

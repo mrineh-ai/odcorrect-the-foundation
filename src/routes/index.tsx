@@ -37,7 +37,7 @@ function Home() {
   return (
     <main>
       {/* ——— Hero ——— */}
-      <section className="relative flex min-h-dvh items-center overflow-hidden bg-ink">
+      <section className="on-dark relative flex min-h-dvh items-center overflow-hidden bg-ink">
         <img
           src={heroEditorial}
           alt="ODCORRECT editorial campaign — tailored charcoal overcoat under runway lighting"
@@ -220,7 +220,7 @@ function Home() {
       </section>
 
       {/* ——— Full-bleed statement ——— */}
-      <section className="relative overflow-hidden bg-ink">
+      <section className="on-dark relative overflow-hidden bg-ink">
         <img
           src={architecture}
           alt="Minimal dark stone gallery lit by a single shaft of light"
@@ -348,7 +348,7 @@ function Home() {
       </section>
 
       {/* ——— Newsletter ——— */}
-      <section className="section-pad hairline-t relative overflow-hidden bg-ink">
+      <section className="on-dark section-pad hairline-t relative overflow-hidden bg-ink">
         <img
           src={craftHands}
           alt=""

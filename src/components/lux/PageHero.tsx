@@ -12,7 +12,7 @@ interface PageHeroProps {
 /** Shared editorial masthead for interior pages. */
 export function PageHero({ eyebrow, title, intro, image, imageAlt }: PageHeroProps) {
   return (
-    <section className="relative flex min-h-[68vh] items-end overflow-hidden bg-ink pb-20 pt-40 lg:min-h-[78vh] lg:pb-28">
+    <section className="on-dark relative flex min-h-[68vh] items-end overflow-hidden bg-ink pb-20 pt-40 lg:min-h-[78vh] lg:pb-28">
       <img
         src={image}
         alt={imageAlt}
