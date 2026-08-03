@@ -138,6 +138,9 @@ html.light {
     font-weight: 300;
     letter-spacing: 0.02em;
     overflow-x: hidden;
+    transition:
+      background-color 400ms var(--ease-luxury),
+      color 400ms var(--ease-luxury);
   }
 
   h1,
@@ -165,7 +168,7 @@ html.light {
     background: var(--ink);
   }
   ::-webkit-scrollbar-thumb {
-    background: oklch(1 0 0 / 12%);
+    background: var(--border);
   }
 }
 
@@ -270,7 +273,7 @@ html.light {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid oklch(1 0 0 / 22%);
+  border: 1px solid var(--border);
   padding: 1.05rem 2.6rem;
   font-family: var(--font-sans);
   font-size: 0.7rem;
@@ -367,7 +370,7 @@ html.light {
 }
 
 @utility hairline-t {
-  border-top: 1px solid oklch(1 0 0 / 10%);
+  border-top: 1px solid var(--border);
 }
 
 @utility section-pad {
