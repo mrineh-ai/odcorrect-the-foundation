@@ -57,14 +57,7 @@ export function Header() {
     <header
       className="fixed inset-x-0 top-0 z-[500] transition-all duration-700"
       style={{
-        backgroundColor: scrolled
-          ? "oklch(1 0 0 / 0.74)"
-          : "oklch(1 0 0 / 0.68)",
-        backdropFilter: "blur(26px) saturate(180%)",
-        borderBottom: "1px solid oklch(1 0 0 / 32%)",
-        boxShadow: scrolled
-          ? "0 2px 14px oklch(0 0 0 / 7%)"
-          : "0 1px 8px oklch(0 0 0 / 4%)",
+        backgroundColor: "transparent",
       }}
     >
       <div className="shell flex items-center justify-between py-5">
@@ -74,10 +67,10 @@ export function Header() {
   className="shrink-0 transition-all duration-1000"
 >
   <Logo
-    width={scrolled ? 108 : 128}
+    width={scrolled ? 112 : 132}
     priority
     className="transition-all duration-1000"
-    style={{ filter: "contrast(1.18) saturate(1.1)" }}
+    style={{ filter: "contrast(1.22) saturate(1.12) drop-shadow(0 1px 2px oklch(0 0 0 / 35%))" }}
   />
 </Link>
 
@@ -87,8 +80,8 @@ export function Header() {
               key={item.to}
               to={item.to}
               className="link-lux"
-              style={{ color: "oklch(0.24 0 0)" }}
-              activeProps={{ style: { color: "var(--gold-dim)" } }}
+              style={{ color: "oklch(0.98 0 0 / 0.92)" }}
+              activeProps={{ style: { color: "var(--gold)" } }}
               activeOptions={{ exact: item.to === "/" }}
             >
               {item.label}
@@ -101,7 +94,7 @@ export function Header() {
           <Link
             to="/coming-soon"
             className="btn-lux-gold !px-7 !py-3"
-            style={{ color: "var(--gold-dim)", borderColor: "var(--gold-dim)" }}
+            style={{ color: "oklch(0.98 0 0 / 0.95)", borderColor: "oklch(0.98 0 0 / 0.55)" }}
           >
             Notify Me
           </Link>
@@ -119,11 +112,11 @@ export function Header() {
           >
             <span
               className="block h-px transition-all duration-700"
-              style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 28, transform: open ? "rotate(45deg) translateY(4px)" : "none" }}
+              style={{ backgroundColor: "oklch(0.98 0 0 / 0.95)", width: open ? 24 : 28, transform: open ? "rotate(45deg) translateY(4px)" : "none" }}
             />
             <span
               className="block h-px transition-all duration-700"
-              style={{ backgroundColor: "oklch(0.24 0 0)", width: open ? 24 : 18, transform: open ? "rotate(-45deg) translateY(-4px)" : "none" }}
+              style={{ backgroundColor: "oklch(0.98 0 0 / 0.95)", width: open ? 24 : 18, transform: open ? "rotate(-45deg) translateY(-4px)" : "none" }}
             />
           </button>
         </div>
