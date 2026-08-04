@@ -127,6 +127,7 @@ html.light {
 
   html {
     scroll-behavior: smooth;
+    overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -138,6 +139,7 @@ html.light {
     font-weight: 300;
     letter-spacing: 0.02em;
     overflow-x: hidden;
+    overscroll-behavior-y: none;
     transition:
       background-color 400ms var(--ease-luxury),
       color 400ms var(--ease-luxury);
