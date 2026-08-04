@@ -58,13 +58,13 @@ export function Header() {
       className="fixed inset-x-0 top-0 z-[500] transition-all duration-700"
       style={{
         backgroundColor: scrolled
-          ? "oklch(1 0 0 / 0.9)"
-          : "oklch(1 0 0 / 0.8)",
-        backdropFilter: "blur(22px) saturate(180%)",
-        borderBottom: "1px solid oklch(0 0 0 / 8%)",
+          ? "oklch(1 0 0 / 0.74)"
+          : "oklch(1 0 0 / 0.68)",
+        backdropFilter: "blur(26px) saturate(180%)",
+        borderBottom: "1px solid oklch(1 0 0 / 32%)",
         boxShadow: scrolled
-          ? "0 1px 12px oklch(0 0 0 / 6%)"
-          : "0 1px 6px oklch(0 0 0 / 3%)",
+          ? "0 2px 14px oklch(0 0 0 / 7%)"
+          : "0 1px 8px oklch(0 0 0 / 4%)",
       }}
     >
       <div className="shell flex items-center justify-between py-5">
@@ -74,10 +74,10 @@ export function Header() {
   className="shrink-0 transition-all duration-1000"
 >
   <Logo
-    width={scrolled ? 104 : 124}
+    width={scrolled ? 108 : 128}
     priority
     className="transition-all duration-1000"
-    style={{ filter: "contrast(1.12) saturate(1.08)" }}
+    style={{ filter: "contrast(1.18) saturate(1.1)" }}
   />
 </Link>
 
