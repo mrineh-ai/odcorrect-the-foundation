@@ -1,82 +1,84 @@
-# Next Upgrade: Launch Readiness — Real Waitlist & Early-Access System
+# ODCORRECT Production Upgrade
 
-## Why this upgrade
-
-ODCORRECT is a pre-launch luxury house. Every page ends with "Notify Me" or "Subscribe," and the "Coming Soon" page exists solely to capture early interest. Today those forms do nothing — they render but don't persist. The single highest-value upgrade is to make the anticipation real: capture, store, and acknowledge every early supporter, and give the founder a private view of the list before the first collection drops.
-
-This upgrade enables Lovable Cloud (database + email + auth) and wires the existing forms to a real backend, without touching any approved design, layout, animation, typography, or content.
+Production hardening only. No redesign — layout, aesthetic, animations, typography, colors, glass effects and responsive behaviour stay exactly as approved.
 
 ---
 
-## What we will build
+## 1. Production SEO metadata
 
-### 1. Enable Lovable Cloud
-- Activate the managed backend (database, auth, email, storage).
-- Confirm the connection and that secrets are available to server functions.
+`src/routes/__root.tsx` already carries a full metadata block; it gets updated in place rather than rebuilt.
 
-### 2. Database: `waitlist` table
-```text
-waitlist
-├─ id            uuid, pk
-├─ email          text, unique, not null
-├─ name           text, nullable (optional, collected on Coming Soon page)
-├─ source         text  ('home' | 'coming-soon' | 'footer')
-├─ ip_hash        text  (privacy-friendly hash, no raw IP stored)
-├─ confirmed      boolean default false
-├─ confirm_token  text  (unique)
-├─ created_at     timestamptz default now()
-└─ status         text default 'pending' ('pending' | 'confirmed' | 'unsubscribed')
-```
-- RLS: only `authenticated` admins can read the list; `anon`/`authenticated` may INSERT only (cannot read others' rows).
-- `service_role` used only by the founder admin view.
-- Grants + RLS + policies in a single migration per Lovable schema rules.
+- Title → `ODCORRECT | Luxury Fashion House | Clothing • Footwear • Fragrance`
+- Description → the new 158-character description supplied.
+- Keywords → the full 16-term list.
+- Robots → `index, follow, max-image-preview:large`
+- Author → `Mrinal Gahlaut`; publisher → `ODCORRECT`; language `en`.
+- Theme color: keep the existing dual `prefers-color-scheme` entries so it tracks light/dark automatically.
+- Canonical: `https://odcorrect.in` at root, and a self-referencing canonical on every leaf route (canonical lives on leaves only — a root canonical would duplicate).
 
-### 3. Server functions (client-safe `*.functions.ts`)
-- `joinWaitlist(email, name?, source?)` — inserts a row, generates a confirm token, fires a confirmation email via Lovable Email.
-- `confirmSubscription(token)` — marks `confirmed = true`.
-- `unsubscribe(token)` — sets `status = 'unsubscribed'`.
-- `listWaitlist()` — protected with `requireSupabaseAuth` + admin role check; returns the list for the founder view.
+Per-page `head()` on every route (`/`, `/about`, `/collections`, `/craftsmanship`, `/journal`, `/coming-soon`, `/contact`, `/founder`, `/privacy-policy`, `/terms`) gets its own title, description, `og:title`, `og:description`, `og:url` and canonical. No page reuses the homepage copy.
 
-### 4. Wire the existing forms
-- `NotifyForm.tsx` (used on Home + Coming Soon) → calls `joinWaitlist` with `source` set per page.
-- Footer email link stays as-is (it's a mailto, not a form).
-- On success: show a refined inline confirmation message (no layout change — replace the form area only).
-- On duplicate email: graceful "You're already on the list" message.
+## 2. Open Graph & Twitter
 
-### 5. Double opt-in email
-- Branded confirmation email using the luxury design language (dark, gold, Cormorant).
-- Single CTA: "Confirm your early access."
-- Unsubscribe link included in every email.
+Root defaults, overridden per page:
 
-### 6. Founder admin view
-- New private route `/founder` (under `_authenticated`).
-- Auth gate: founder signs in via Lovable Cloud auth (email + password, or magic link).
-- Shows: total signups, confirmed count, recent entries, simple CSV export.
-- Minimal luxury styling, reuses existing design tokens. No public link.
+- `og:site_name` ODCORRECT, `og:type` website, `og:url` https://odcorrect.in
+- `og:title` / `og:description` per the supplied copy
+- `og:image` → a single `OG_IMAGE` constant in `src/lib/seo.ts` pointing at the logo today, so a dedicated share image is a one-line swap later.
+- Twitter: `summary_large_image`, title, description, image (same constant).
 
-### 7. Privacy & legal
-- Add a short privacy note under each form: "We never share your address. Unsubscribe anytime."
-- Hash IPs (no raw storage) to stay privacy-first.
+## 3. Structured data (JSON-LD)
 
----
+Root: Organization (name, url, logo, description, slogan, founder + CEO as `Person: Mrinal Gahlaut`, `ContactPoint` with ceo@odcorrect.in, `sameAs` social placeholders), Brand, and WebSite with a `SearchAction`.
 
-## What we will NOT change
-- No redesign, no layout, no color, no typography, no animation changes.
-- No new public pages beyond the private `/founder` route.
-- Splash screen, header, footer, hero, philosophy, craftsmanship, journal — untouched.
-- Existing "Notify Me" buttons keep their style; only their behavior changes.
+Leaf routes: `BreadcrumbList` on every non-home page. The founder page also carries a `Person` schema for Mrinal Gahlaut.
 
----
+## 4. Favicon audit
 
-## Out of scope (future upgrades, not this one)
-- Shoppable product catalog and pre-order flow (next phase, after launch).
-- Journal CMS / editorial workflow (next phase).
-- Lovable AI features (image generation, chat) — not needed yet.
+`public/` already contains `favicon.ico`, 16x16, 32x32, apple-touch-icon, both android-chrome sizes and `site.webmanifest`. This pass verifies each one is actually rendered from the ODCORRECT logo (not a leftover default), confirms the manifest name/theme colours, adds `browserconfig.xml` with the msapplication tile, and greps the whole project for any remaining Lovable branding reference.
+
+## 5. New page — `/founder`, "Meet the Founder"
+
+New file `src/routes/founder.tsx`, built entirely from the existing design tokens and `Reveal` / `DustField` components so it reads as part of the same house. Sections in order:
+
+1. **Hero** — eyebrow "Meet the Founder", name in the display serif, "Founder & CEO", large portrait, slow fade reveal.
+2. **Founder letter** — a long, personal, restrained letter covering why ODCORRECT exists, why luxury should outlive trends, fewer products, craftsmanship, details, timelessness, and building a house rather than a brand. Signed `— Mrinal Gahlaut / Founder / ODCORRECT`.
+3. **Timeline** — Vision, Foundation, Future Collections, Footwear, Fragrance, Global House, as a hairline vertical editorial timeline.
+4. **Philosophy** — expanded section on timelessness, craftsmanship, patience, luxury, minimalism, perfection, purpose, quality over quantity.
+5. **Personal values** — five cards: design over trends, quality over quantity, craft over speed, luxury through restraint, long-term thinking.
+6. **Signature quote** — large centred editorial typography: *"We are not here to create more fashion. We are here to create fewer things worth remembering."*
+
+`Founder` is added to the header nav (desktop + mobile) and to the footer links.
+
+## 6. Homepage changes
+
+- **Remove** the founder letter section entirely from `src/routes/index.tsx` (portrait, letter, signature block). No empty spacing left behind.
+- **Add "Explore the House"** — a restrained link grid: About, Craftsmanship, Collections, Journal, Founder, Coming Soon, styled with the existing `link-lux` / hairline treatment.
+- **"The House" editorial cards** — the homepage already has a three-up category section driven by `src/data/categories.ts` (Luxury Clothing / Premium Footwear / Signature Fragrances). Rather than adding a second near-identical three-card block, this section is retitled **The House**, the three supplied taglines are used verbatim, and each card carries a discreet **Coming Soon** marker. Same layout, same images, same animations.
+
+## 7. Performance
+
+Logo preload already present; keep it. Confirm every below-the-fold image uses `loading="lazy"` with explicit `width`/`height` (prevents layout shift), keep `fetchPriority="high"` on the hero only, and confirm fonts stay on `display=swap` with existing preconnects.
+
+## 8. Accessibility
+
+Audit pass, no visual change: single `<main>` per page, correct h1→h2→h3 order on the new founder page, `aria-label` on every icon-only control, visible focus indicators on links and buttons, keyboard reachability of the mobile menu, and contrast check on gold-on-dark and gold-on-light text.
+
+## 9. UX polish (subtle only)
+
+- Underline-sweep hover on nav links using the existing easing curve.
+- Slightly smoother button hover transitions.
+- Image reveal + scroll animations tuned via the existing `Reveal` component (timing only, no new animation style).
+
+## 10. Final check
+
+No Lovable branding, no placeholder text, no broken images, no console errors, page ends at the footer, responsive at desktop / 412px Android / 390px iPhone. Verified with Playwright across viewports plus a typecheck.
 
 ---
 
 ## Technical notes
-- Server functions live in `src/lib/waitlist.functions.ts`; DB helpers in `src/lib/waitlist.server.ts`.
-- Admin route under `src/routes/_authenticated/founder.tsx` to stay behind the auth gate.
-- `requireSupabaseAuth` middleware on the admin server function; `has_role('admin')` check before returning the list.
-- One migration creates the table, grants, RLS, and a `confirm_token`-based policy.
+
+- New: `src/routes/founder.tsx`, `src/lib/seo.ts` (shared constants: site URL, OG image, description, keywords, breadcrumb helper), `public/browserconfig.xml`.
+- Edited: `src/routes/__root.tsx` (metadata + JSON-LD), every route file (`head()`), `src/routes/index.tsx` (remove founder section, add Explore the House, retitle The House), `src/components/lux/Header.tsx` and `Footer.tsx` (Founder link).
+- Canonical tags go on leaf routes only — TanStack concatenates `links`, so a root canonical would emit duplicates.
+- `og:image` stays out of `__root` per-leaf overrides where a page has its own hero image.
