@@ -3,6 +3,7 @@ import journalMaterials from "@/assets/journal-materials.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
 import { CATEGORIES } from "@/data/categories";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/collections")({
   head: () => ({
@@ -19,8 +20,14 @@ export const Route = createFileRoute("/collections")({
         content:
           "Luxury clothing, premium footwear and signature fragrances — the three disciplines of the house.",
       },
+
+      { property: "og:url", content: absoluteUrl("/collections") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/collections" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/collections") }],
+    scripts: [breadcrumbLd([{ name: "Collections", path: "/collections" }])],
   }),
   component: Collections,
 });

@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import architecture from "@/assets/architecture.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -18,8 +19,14 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "Enquiries, press and partnership correspondence with ODCORRECT.",
       },
+
+      { property: "og:url", content: absoluteUrl("/contact") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/contact") }],
+    scripts: [breadcrumbLd([{ name: "Contact", path: "/contact" }])],
   }),
   component: Contact,
 });

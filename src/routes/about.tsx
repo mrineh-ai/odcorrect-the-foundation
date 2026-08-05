@@ -4,6 +4,7 @@ import atelier from "@/assets/atelier.jpg";
 import journalFuture from "@/assets/journal-future.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -20,8 +21,14 @@ export const Route = createFileRoute("/about")({
         content:
           "The values, standards and intent behind ODCORRECT — a luxury house of clothing, footwear and fragrance.",
       },
+
+      { property: "og:url", content: absoluteUrl("/about") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/about") }],
+    scripts: [breadcrumbLd([{ name: "About", path: "/about" }])],
   }),
   component: About,
 });

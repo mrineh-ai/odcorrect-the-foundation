@@ -9,9 +9,11 @@ const NAV = [
   { to: "/about", label: "About" },
   { to: "/collections", label: "Collections" },
   { to: "/craftsmanship", label: "Craftsmanship" },
+  { to: "/founder", label: "Founder" },
   { to: "/journal", label: "Journal" },
   { to: "/contact", label: "Contact" },
 ] as const;
+
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);

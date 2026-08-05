@@ -6,6 +6,7 @@ import { Reveal } from "@/components/lux/Reveal";
 import { NotifyForm } from "@/components/lux/NotifyForm";
 import { DustField } from "@/components/lux/DustField";
 import { CATEGORIES } from "@/data/categories";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/coming-soon")({
   head: () => ({
@@ -22,8 +23,14 @@ export const Route = createFileRoute("/coming-soon")({
         content:
           "The opening chapter of ODCORRECT. Limited quantity, announced only to the private list.",
       },
+
+      { property: "og:url", content: absoluteUrl("/coming-soon") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/coming-soon" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/coming-soon") }],
+    scripts: [breadcrumbLd([{ name: "Coming Soon", path: "/coming-soon" }])],
   }),
   component: ComingSoon,
 });

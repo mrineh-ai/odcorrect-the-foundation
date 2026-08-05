@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/lux/Reveal";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
@@ -15,8 +16,14 @@ export const Route = createFileRoute("/privacy-policy")({
         property: "og:description",
         content: "How ODCORRECT handles and protects personal information.",
       },
+
+      { property: "og:url", content: absoluteUrl("/privacy-policy") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/privacy-policy" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/privacy-policy") }],
+    scripts: [breadcrumbLd([{ name: "Privacy Policy", path: "/privacy-policy" }])],
   }),
   component: Privacy,
 });

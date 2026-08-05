@@ -5,6 +5,7 @@ import atelier from "@/assets/atelier.jpg";
 import categoryFootwear from "@/assets/category-footwear.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/craftsmanship")({
   head: () => ({
@@ -21,8 +22,14 @@ export const Route = createFileRoute("/craftsmanship")({
         content:
           "Premium materials, considered construction and hand finishing — the making standards of the house.",
       },
+
+      { property: "og:url", content: absoluteUrl("/craftsmanship") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/craftsmanship" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/craftsmanship") }],
+    scripts: [breadcrumbLd([{ name: "Craftsmanship", path: "/craftsmanship" }])],
   }),
   component: Craftsmanship,
 });

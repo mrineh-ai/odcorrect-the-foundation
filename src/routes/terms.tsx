@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/lux/Reveal";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({
@@ -15,8 +16,14 @@ export const Route = createFileRoute("/terms")({
         property: "og:description",
         content: "Terms governing use of the ODCORRECT website and its content.",
       },
+
+      { property: "og:url", content: absoluteUrl("/terms") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/terms" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/terms") }],
+    scripts: [breadcrumbLd([{ name: "Terms & Conditions", path: "/terms" }])],
   }),
   component: Terms,
 });
