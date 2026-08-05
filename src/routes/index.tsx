@@ -3,7 +3,6 @@ import heroEditorial from "@/assets/hero-editorial.jpg";
 import craftFabric from "@/assets/craft-fabric.jpg";
 import craftHands from "@/assets/craft-hands.jpg";
 import architecture from "@/assets/architecture.jpg";
-import founderPortrait from "@/assets/founder-portrait.jpg";
 import { Reveal } from "@/components/lux/Reveal";
 import { DustField } from "@/components/lux/DustField";
 import { NotifyForm } from "@/components/lux/NotifyForm";
@@ -11,27 +10,35 @@ import { NotifyForm } from "@/components/lux/NotifyForm";
 import { JournalCard } from "@/components/lux/JournalCard";
 import { JOURNAL_ENTRIES } from "@/data/journal";
 import { CATEGORIES } from "@/data/categories";
+import { pageSeo } from "@/lib/seo";
+
+const homeSeo = pageSeo({
+  path: "/",
+  title: "ODCORRECT | Luxury Fashion House | Clothing • Footwear • Fragrance",
+  description:
+    "ODCORRECT is a luxury fashion house creating timeless clothing, premium footwear and refined fragrances through exceptional craftsmanship and uncompromising quality.",
+  ogTitle: "ODCORRECT | Luxury Fashion House",
+  ogDescription:
+    "Timeless clothing, premium footwear and luxury fragrances designed for people who appreciate craftsmanship over trends.",
+});
+
+const EXPLORE = [
+  { to: "/about", label: "About", note: "The standards the house was built on." },
+  { to: "/craftsmanship", label: "Craftsmanship", note: "Materials, construction, finishing." },
+  { to: "/collections", label: "Collections", note: "Three disciplines, nothing else." },
+  { to: "/journal", label: "Journal", note: "Notes written from inside the atelier." },
+  { to: "/founder", label: "Founder", note: "A letter from Mrinal Gahlaut." },
+  { to: "/coming-soon", label: "Coming Soon", note: "The first chapter, announced quietly." },
+] as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "ODCORRECT — Luxury. Without Compromise." },
-      {
-        name: "description",
-        content:
-          "ODCORRECT is preparing a new standard of premium fashion through timeless clothing, footwear and fragrances. Discover the philosophy of the house.",
-      },
-      { property: "og:title", content: "ODCORRECT — Luxury. Without Compromise." },
-      {
-        property: "og:description",
-        content:
-          "A luxury fashion house devoted to craftsmanship, patience and timeless design. Clothing, footwear and fragrance.",
-      },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
+    meta: homeSeo.meta,
+    links: homeSeo.links,
   }),
   component: Home,
 });
+
 
 function Home() {
   return (
@@ -131,15 +138,15 @@ function Home() {
         </div>
       </section>
 
-      {/* ——— Categories ——— */}
+      {/* ——— The House ——— */}
       <section className="section-pad hairline-t bg-ink">
         <div className="shell">
           <Reveal className="max-w-2xl">
-            <p className="eyebrow">Three Disciplines</p>
-            <h2 className="display-lg mt-8 text-foreground">The Future of the House</h2>
+            <p className="eyebrow">The House</p>
+            <h2 className="display-lg mt-8 text-foreground">Three Disciplines</h2>
             <p className="body-lux mt-8">
-              Three categories. No more. Each one held to the same standard, each one released
-              only when it is ready.
+              Clothing, footwear and fragrance. No more. Each one held to the same standard,
+              each one released only when it is ready.
             </p>
           </Reveal>
 
@@ -158,9 +165,12 @@ function Home() {
                     />
                   </div>
                   <div className="px-7 py-10 lg:px-10 lg:py-12">
-                    <p className="eyebrow">{c.index}</p>
+                    <div className="flex items-center justify-between gap-6">
+                      <p className="eyebrow">{c.index}</p>
+                      <p className="eyebrow-muted">Coming Soon</p>
+                    </div>
                     <h3 className="display-md mt-5 text-foreground">{c.name}</h3>
-                    <p className="body-lux mt-4">{c.tagline}</p>
+                    <p className="body-lux mt-4">{c.houseLine}</p>
                     <span className="link-lux mt-8 inline-block">Explore</span>
                   </div>
                 </Link>
@@ -169,6 +179,7 @@ function Home() {
           </div>
         </div>
       </section>
+
 
       {/* ——— Craftsmanship ——— */}
       <section className="section-pad bg-background">
@@ -240,71 +251,43 @@ function Home() {
         </div>
       </section>
 
-      {/* ——— Founder's letter ——— */}
+      {/* ——— Explore the House ——— */}
       <section className="section-pad bg-background">
         <div className="shell">
-          <div className="grid gap-16 lg:grid-cols-12 lg:gap-24">
-            <Reveal className="lg:col-span-5">
-              <div className="glass-sheen overflow-hidden">
-                <img
-                  src={founderPortrait}
-                  alt="Editorial portrait of Mrinal Gahlaut, founder of ODCORRECT"
-                  loading="lazy"
-                  width={719}
-                  height={1016}
-                  className="img-zoom h-[520px] w-full object-cover object-top lg:h-[720px]"
-                />
-              </div>
-            </Reveal>
+          <Reveal className="max-w-2xl">
+            <p className="eyebrow">Explore</p>
+            <div className="rule-gold mt-8" />
+            <h2 className="display-lg mt-10 text-foreground">Explore the House</h2>
+          </Reveal>
 
-            <Reveal delay={160} className="lg:col-span-7">
-              <p className="eyebrow">A Letter From The Founder</p>
-              <div className="rule-gold mt-8" />
-              <h2 className="display-lg mt-10 text-foreground">On beginning.</h2>
-
-              <div className="mt-10 space-y-7">
-                <p className="body-lux">
-                  Fashion today moves quickly. It follows trends that arrive fully formed and
-                  leave before anyone has learned to love them. I have watched beautiful
-                  materials rushed into objects designed to be forgotten, and I have never
-                  been able to accept it as the natural order of things.
-                </p>
-                <p className="body-lux">
-                  ODCORRECT was created to pursue something different. Not louder. Not faster.
-                  Simply better, and for longer. My ambition is to build products people are
-                  proud to wear for years rather than for one season — pieces that quietly
-                  become part of a life instead of a moment.
-                </p>
-                <p className="body-lux">
-                  Every future garment, every pair of shoes and every fragrance that carries
-                  this name will have to represent three things before it is allowed to exist:
-                  patience, craftsmanship, and authenticity. If a piece cannot answer for all
-                  three, it will not be made. That is the standard I have written down, and it
-                  is the one I intend to be held to.
-                </p>
-                <p className="body-lux">
-                  The journey is only beginning. There is no collection yet — only a promise,
-                  a set of standards, and a great deal of work ahead. Thank you for being one
-                  of the earliest people to discover ODCORRECT. You are here before anything
-                  exists, which is the rarest place to stand.
-                </p>
-              </div>
-
-              <div className="mt-14 border-t border-border pt-10">
-                <p
-                  className="text-4xl leading-tight text-gold italic sm:text-5xl"
-                  style={{ fontFamily: "var(--font-display)", letterSpacing: "0.02em" }}
-                >
-                  Mrinal Gahlaut
-                </p>
-                <p className="eyebrow-muted mt-6">Mrinal Gahlaut</p>
-                <p className="eyebrow-muted mt-2">Founder</p>
-                <p className="eyebrow mt-2">ODCORRECT</p>
-              </div>
-            </Reveal>
-          </div>
+          <nav aria-label="Explore the house" className="mt-16">
+            <ul className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+              {EXPLORE.map((item, i) => (
+                <Reveal key={item.to} delay={i * 100} className="bg-background" as="li">
+                  <Link
+                    to={item.to}
+                    className="group flex h-full items-baseline justify-between gap-6 px-7 py-10 transition-colors duration-700 hover:bg-ink/40 lg:px-10 lg:py-12"
+                  >
+                    <span>
+                      <span className="display-md block text-foreground transition-colors duration-700 group-hover:text-gold">
+                        {item.label}
+                      </span>
+                      <span className="body-lux mt-3 block">{item.note}</span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="text-gold transition-transform duration-700 group-hover:translate-x-1"
+                    >
+                      &rarr;
+                    </span>
+                  </Link>
+                </Reveal>
+              ))}
+            </ul>
+          </nav>
         </div>
       </section>
+
 
       {/* ——— Coming soon / countdown ——— */}
       <section className="section-pad hairline-t relative overflow-hidden bg-ink">

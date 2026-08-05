@@ -5,6 +5,7 @@ import { Reveal } from "@/components/lux/Reveal";
 import { JournalCard } from "@/components/lux/JournalCard";
 import { NotifyForm } from "@/components/lux/NotifyForm";
 import { JOURNAL_ENTRIES } from "@/data/journal";
+import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/journal")({
   head: () => ({
@@ -21,8 +22,14 @@ export const Route = createFileRoute("/journal")({
         content:
           "Craftsmanship, materials, design philosophy and the future of luxury — notes from the house.",
       },
+
+      { property: "og:url", content: absoluteUrl("/journal") },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/journal" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/journal") }],
+    scripts: [breadcrumbLd([{ name: "Journal", path: "/journal" }])],
   }),
   component: Journal,
 });

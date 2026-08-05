@@ -9,6 +9,8 @@ export interface Category {
   tagline: string;
   description: string;
   image: string;
+  /** Short editorial line used by the homepage "The House" cards. */
+  houseLine: string;
   notes: string[];
 }
 
@@ -26,6 +28,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Structured outerwear, considered tailoring and quiet essentials cut from fibres chosen for how they age rather than how they photograph. Each pattern is drafted once, corrected slowly, and kept.",
     image: categoryClothing,
+    houseLine: "Timeless silhouettes crafted to be worn for years, not seasons.",
     notes: ["Full-canvas construction", "Hand-finished edges", "Natural fibre only"],
   },
   {
@@ -36,6 +39,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Leathers tanned over months, lasts refined until the line is inevitable, soles stitched so the shoe can be renewed again and again. Footwear that records a life rather than a season.",
     image: categoryFootwear,
+    houseLine: "Precision, comfort and enduring design in every step.",
     notes: ["Vegetable-tanned leather", "Goodyear welted", "Resolable for decades"],
   },
   {
@@ -46,6 +50,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Compositions built around a small number of exceptional raw materials, given the time to settle. Weighted glass, restrained architecture, and a trail meant only for those standing close.",
     image: categoryFragrance,
+    houseLine: "Scents created to become signatures, not trends.",
     notes: ["High-concentration extrait", "Rare naturals", "Refillable flacon"],
   },
 ];

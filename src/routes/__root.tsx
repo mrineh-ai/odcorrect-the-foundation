@@ -16,6 +16,17 @@ import { Footer } from "@/components/lux/Footer";
 import { Splash } from "@/components/lux/Splash";
 import { LuxCursor } from "@/components/lux/LuxCursor";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  OG_DESCRIPTION,
+  OG_IMAGE,
+  LOGO_URL,
+} from "@/lib/seo";
+
 
 
 function NotFoundComponent() {
@@ -77,22 +88,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      {
-        title:
-          "ODCORRECT | Luxury Fashion House | Clothing, Footwear & Fragrance",
-      },
-      {
-        name: "description",
-        content:
-          "ODCORRECT is a premium luxury fashion house crafting timeless clothing, footwear and fragrances through exceptional craftsmanship, modern design and uncompromising quality.",
-      },
-      {
-        name: "keywords",
-        content:
-          "Luxury Fashion, Premium Clothing, Luxury Shoes, Luxury Fragrance, Designer Fashion, Premium Apparel, Luxury Lifestyle, ODCORRECT, Mrinal Gahlaut, Indian Luxury Brand, Fashion House",
-      },
-      { name: "author", content: "ODCORRECT" },
-      { name: "robots", content: "index, follow" },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "keywords", content: SITE_KEYWORDS },
+      { name: "author", content: "Mrinal Gahlaut" },
+      { name: "publisher", content: "ODCORRECT" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "language", content: "en" },
       {
         name: "theme-color",
         content: "#050505",
@@ -103,30 +105,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "#FAF8F5",
         media: "(prefers-color-scheme: light)",
       },
-      { property: "og:site_name", content: "ODCORRECT" },
+      { name: "msapplication-TileColor", content: "#050505" },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:locale", content: "en_IN" },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "ODCORRECT | Luxury Fashion House" },
-      {
-        property: "og:description",
-        content:
-          "Luxury clothing, footwear and fragrance crafted for timeless elegance.",
-      },
-      { property: "og:url", content: "https://odcorrect.in/" },
-      {
-        property: "og:image",
-        content: "https://odcorrect.in/odcorrect-logo.png",
-      },
+      { property: "og:description", content: OG_DESCRIPTION },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:alt", content: "ODCORRECT — luxury fashion house" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "ODCORRECT | Luxury Fashion House" },
-      {
-        name: "twitter:description",
-        content:
-          "Luxury clothing, footwear and fragrance crafted for timeless elegance.",
-      },
-      {
-        name: "twitter:image",
-        content: "https://odcorrect.in/odcorrect-logo.png",
-      },
+      { name: "twitter:description", content: OG_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -151,28 +142,85 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           {
             "@context": "https://schema.org",
             "@type": "Organization",
+            "@id": `${SITE_URL}/#organization`,
             name: "ODCORRECT",
-            url: "https://odcorrect.in",
-            logo: "https://odcorrect.in/odcorrect-logo.png",
-            description:
-              "A luxury fashion house devoted to timeless clothing, footwear and fragrance.",
+            legalName: "ODCORRECT",
+            url: `${SITE_URL}/`,
+            logo: {
+              "@type": "ImageObject",
+              url: LOGO_URL,
+              caption: "ODCORRECT",
+            },
+            image: LOGO_URL,
+            description: SITE_DESCRIPTION,
             slogan: "Luxury. Without Compromise.",
-            founder: { "@type": "Person", name: "Mrinal Gahlaut" },
+            foundingDate: "2026",
+            founder: {
+              "@type": "Person",
+              name: "Mrinal Gahlaut",
+              jobTitle: "Founder & Chief Executive Officer",
+              url: `${SITE_URL}/founder`,
+            },
+            employee: {
+              "@type": "Person",
+              name: "Mrinal Gahlaut",
+              jobTitle: "Chief Executive Officer",
+            },
             email: "ceo@odcorrect.in",
             areaServed: "Worldwide",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "New Delhi",
+              addressCountry: "IN",
+            },
+            contactPoint: [
+              {
+                "@type": "ContactPoint",
+                contactType: "customer service",
+                email: "ceo@odcorrect.in",
+                areaServed: "Worldwide",
+                availableLanguage: ["English"],
+              },
+            ],
+            sameAs: [
+              "https://www.instagram.com/odcorrect",
+              "https://www.linkedin.com/company/odcorrect",
+              "https://x.com/odcorrect",
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Brand",
+            "@id": `${SITE_URL}/#brand`,
+            name: "ODCORRECT",
+            url: `${SITE_URL}/`,
+            logo: LOGO_URL,
+            slogan: "Luxury. Without Compromise.",
+            description:
+              "A luxury fashion house of timeless clothing, premium footwear and refined fragrance.",
           },
           {
             "@context": "https://schema.org",
             "@type": "WebSite",
+            "@id": `${SITE_URL}/#website`,
             name: "ODCORRECT",
-            url: "https://odcorrect.in",
+            url: `${SITE_URL}/`,
             inLanguage: "en",
-            publisher: { "@type": "Organization", name: "ODCORRECT" },
+            publisher: { "@id": `${SITE_URL}/#organization` },
+            potentialAction: {
+              "@type": "SearchAction",
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: `${SITE_URL}/journal?q={search_term_string}`,
+              },
+              "query-input": "required name=search_term_string",
+            },
           },
         ]),
       },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,

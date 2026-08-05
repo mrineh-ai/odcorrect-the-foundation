@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://odcorrect.in/sitemap.xml
