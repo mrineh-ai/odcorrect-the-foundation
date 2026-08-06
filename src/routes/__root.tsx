@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
       { name: "keywords", content: SITE_KEYWORDS },
-      { name: "author", content: "Mrinal Gahlaut" },
+      { name: "author", content: "ODCORRECT" },
       { name: "publisher", content: "ODCORRECT" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "language", content: "en" },
