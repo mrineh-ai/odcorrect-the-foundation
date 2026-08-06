@@ -27,7 +27,7 @@ const EXPLORE = [
   { to: "/craftsmanship", label: "Craftsmanship", note: "Materials, construction, finishing." },
   { to: "/collections", label: "Collections", note: "Three disciplines, nothing else." },
   { to: "/journal", label: "Journal", note: "Notes written from inside the atelier." },
-  { to: "/founder", label: "Founder", note: "A letter from Mrinal Gahlaut." },
+  
   { to: "/coming-soon", label: "Coming Soon", note: "The first chapter, announced quietly." },
 ] as const;
 

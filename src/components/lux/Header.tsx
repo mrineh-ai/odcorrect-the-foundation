@@ -9,7 +9,6 @@ const NAV = [
   { to: "/about", label: "About" },
   { to: "/collections", label: "Collections" },
   { to: "/craftsmanship", label: "Craftsmanship" },
-  { to: "/founder", label: "Founder" },
   { to: "/journal", label: "Journal" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -17,12 +16,33 @@ const NAV = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
+    let last = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const delta = y - last;
+      setScrolled(y > 24);
+      // ignore micro-movements and rubber-banding to avoid flicker
+      if (Math.abs(delta) < 6 || y < 0) return;
+      if (delta > 0 && y > 120) setHidden(true);
+      else if (delta < 0) setHidden(false);
+      last = y;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -57,22 +77,29 @@ export function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-[500] transition-all duration-700"
+      className="fixed inset-x-0 top-0 z-[500] will-change-transform"
       style={{
         backgroundColor: "transparent",
+        transform: hidden && !open ? "translateY(-100%)" : "translateY(0)",
+        opacity: hidden && !open ? 0 : 1,
+        transition:
+          "transform 520ms cubic-bezier(0.16,1,0.3,1), opacity 380ms cubic-bezier(0.16,1,0.3,1)",
       }}
     >
       <div className="shell flex items-center justify-between py-5">
        <Link
   to="/"
   aria-label="ODCORRECT home"
-  className="shrink-0 transition-all duration-1000"
+  className="-ml-1 shrink-0 px-1 py-1 transition-all duration-1000"
 >
   <Logo
-    width={scrolled ? 112 : 132}
+    width={scrolled ? 124 : 145}
     priority
     className="transition-all duration-1000"
-    style={{ filter: "contrast(1.22) saturate(1.12) drop-shadow(0 1px 2px oklch(0 0 0 / 35%))" }}
+    style={{
+      filter:
+        "contrast(1.3) saturate(1.16) brightness(1.06) drop-shadow(0 1px 3px oklch(0 0 0 / 30%))",
+    }}
   />
 </Link>
 
@@ -127,8 +154,10 @@ export function Header() {
 
       <div
         id="mobile-nav"
-        className="fixed inset-0 z-[600] flex h-[100dvh] w-screen flex-col justify-center overflow-y-auto overscroll-contain bg-ink px-8 py-24 lg:hidden"
+        className="fixed inset-0 z-[600] flex h-[100dvh] w-screen flex-col justify-center overflow-y-auto overscroll-contain px-8 py-24 lg:hidden"
         style={{
+          backgroundColor: "color-mix(in oklch, var(--background) 68%, transparent)",
+          backdropFilter: "blur(30px) saturate(180%)",
           opacity: open ? 1 : 0,
           transform: open ? "translateY(0)" : "translateY(-8px)",
           visibility: open ? "visible" : "hidden",
