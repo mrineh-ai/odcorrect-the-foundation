@@ -165,13 +165,10 @@ function Home() {
                     />
                   </div>
                   <div className="px-7 py-10 lg:px-10 lg:py-12">
-                    <div className="flex items-center justify-between gap-6">
-                      <p className="eyebrow">{c.index}</p>
-                      <p className="eyebrow-muted">Coming Soon</p>
-                    </div>
+                    <p className="eyebrow">{c.index}</p>
                     <h3 className="display-md mt-5 text-foreground">{c.name}</h3>
                     <p className="body-lux mt-4">{c.houseLine}</p>
-                    <span className="link-lux mt-8 inline-block">Explore</span>
+                    <p className="eyebrow-muted mt-8 border-t border-border pt-6">Coming Soon</p>
                   </div>
                 </Link>
               </Reveal>

@@ -22,20 +22,16 @@ export const OG_DESCRIPTION =
 export const SITE_KEYWORDS = [
   "Luxury Fashion",
   "Luxury Clothing",
-  "Premium Clothing",
-  "Luxury Shoes",
   "Luxury Footwear",
   "Luxury Fragrance",
-  "Designer Fashion",
+  "Designer Clothing",
+  "Premium Clothing",
   "Fashion House",
-  "Luxury Lifestyle",
-  "Premium Brand",
   "Indian Luxury Brand",
-  "ODCORRECT",
-  "Mrinal Gahlaut",
-  "Timeless Fashion",
+  "Luxury Lifestyle",
   "Minimal Luxury",
-  "Luxury Apparel",
+  "Timeless Fashion",
+  "ODCORRECT",
 ].join(", ");
 
 /** Absolute URL for a route path ("/about" -> "https://odcorrect.in/about"). */

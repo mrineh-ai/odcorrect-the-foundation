@@ -15,6 +15,7 @@ import { Header } from "@/components/lux/Header";
 import { Footer } from "@/components/lux/Footer";
 import { Splash } from "@/components/lux/Splash";
 import { LuxCursor } from "@/components/lux/LuxCursor";
+import { RouteTransition } from "@/components/lux/RouteTransition";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import {
   SITE_URL,
@@ -30,18 +31,31 @@ import {
 
 
 function NotFoundComponent() {
+  useEffect(() => {
+    const id = setTimeout(() => {
+      document.title = "Page Not Found — ODCORRECT";
+    }, 60);
+    const tag = document.createElement("meta");
+    tag.name = "robots";
+    tag.content = "noindex, follow";
+    document.head.appendChild(tag);
+    return () => {
+      clearTimeout(id);
+      tag.remove();
+    };
+  }, []);
+
   return (
     <main className="flex min-h-dvh items-center justify-center bg-ink px-6">
       <div className="max-w-xl text-center">
         <p className="eyebrow">Error 404</p>
         <h1 className="display-xl mt-8 text-foreground">Nothing Here</h1>
         <p className="body-lux mx-auto mt-8 max-w-md">
-          The page you are looking for has been moved, retired, or never existed. Some
-          things are best left unmade.
+          The page you&apos;re looking for isn&apos;t part of The House.
         </p>
         <div className="mt-14">
-          <Link to="/" className="btn-lux">
-            Return to the House
+          <Link to="/" className="btn-lux-gold">
+            Return Home
           </Link>
         </div>
       </div>
@@ -91,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
       { name: "keywords", content: SITE_KEYWORDS },
-      { name: "author", content: "ODCORRECT" },
+      { name: "author", content: "Mrinal Gahlaut" },
       { name: "publisher", content: "ODCORRECT" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "language", content: "en" },
@@ -122,10 +136,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "msapplication-config", href: "/browserconfig.xml" },
       { rel: "preload", as: "image", href: "/odcorrect-logo.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -190,6 +207,80 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           },
           {
             "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": `${SITE_URL}/#webpage`,
+            url: `${SITE_URL}/`,
+            name: SITE_TITLE,
+            description: SITE_DESCRIPTION,
+            inLanguage: "en",
+            isPartOf: { "@id": `${SITE_URL}/#website` },
+            about: { "@id": `${SITE_URL}/#brand` },
+            primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "@id": `${SITE_URL}/#house`,
+            name: "The House of ODCORRECT",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                item: {
+                  "@type": "Product",
+                  name: "Luxury Clothing",
+                  brand: { "@id": `${SITE_URL}/#brand` },
+                  description: "Timeless garments built to outlive trends.",
+                  image: OG_IMAGE,
+                  url: `${SITE_URL}/collections#clothing`,
+                  offers: {
+                    "@type": "Offer",
+                    availability: "https://schema.org/PreOrder",
+                    priceCurrency: "INR",
+                    url: `${SITE_URL}/coming-soon`,
+                  },
+                },
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                item: {
+                  "@type": "Product",
+                  name: "Premium Footwear",
+                  brand: { "@id": `${SITE_URL}/#brand` },
+                  description: "Precision, comfort and enduring craftsmanship.",
+                  image: OG_IMAGE,
+                  url: `${SITE_URL}/collections#footwear`,
+                  offers: {
+                    "@type": "Offer",
+                    availability: "https://schema.org/PreOrder",
+                    priceCurrency: "INR",
+                    url: `${SITE_URL}/coming-soon`,
+                  },
+                },
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                item: {
+                  "@type": "Product",
+                  name: "Signature Fragrances",
+                  brand: { "@id": `${SITE_URL}/#brand` },
+                  description: "Scents created to become signatures rather than trends.",
+                  image: OG_IMAGE,
+                  url: `${SITE_URL}/collections#fragrance`,
+                  offers: {
+                    "@type": "Offer",
+                    availability: "https://schema.org/PreOrder",
+                    priceCurrency: "INR",
+                    url: `${SITE_URL}/coming-soon`,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
             "@type": "WebSite",
             "@id": `${SITE_URL}/#website`,
             name: "ODCORRECT",
@@ -238,6 +329,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Splash />
       <LuxCursor />
+      <RouteTransition />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[9999] focus:bg-charcoal focus:px-5 focus:py-3 focus:text-sm focus:text-gold"
