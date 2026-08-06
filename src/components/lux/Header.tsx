@@ -77,22 +77,29 @@ export function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-[500] transition-all duration-700"
+      className="fixed inset-x-0 top-0 z-[500] will-change-transform"
       style={{
         backgroundColor: "transparent",
+        transform: hidden && !open ? "translateY(-100%)" : "translateY(0)",
+        opacity: hidden && !open ? 0 : 1,
+        transition:
+          "transform 520ms cubic-bezier(0.16,1,0.3,1), opacity 380ms cubic-bezier(0.16,1,0.3,1)",
       }}
     >
       <div className="shell flex items-center justify-between py-5">
        <Link
   to="/"
   aria-label="ODCORRECT home"
-  className="shrink-0 transition-all duration-1000"
+  className="-ml-1 shrink-0 px-1 py-1 transition-all duration-1000"
 >
   <Logo
-    width={scrolled ? 112 : 132}
+    width={scrolled ? 124 : 145}
     priority
     className="transition-all duration-1000"
-    style={{ filter: "contrast(1.22) saturate(1.12) drop-shadow(0 1px 2px oklch(0 0 0 / 35%))" }}
+    style={{
+      filter:
+        "contrast(1.3) saturate(1.16) brightness(1.06) drop-shadow(0 1px 3px oklch(0 0 0 / 30%))",
+    }}
   />
 </Link>
 
