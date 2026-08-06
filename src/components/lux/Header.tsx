@@ -156,7 +156,7 @@ export function Header() {
         id="mobile-nav"
         className="fixed inset-0 z-[600] flex h-[100dvh] w-screen flex-col justify-center overflow-y-auto overscroll-contain px-8 py-24 lg:hidden"
         style={{
-          backgroundColor: "color-mix(in oklch, var(--background) 55%, transparent)",
+          backgroundColor: "color-mix(in oklch, var(--background) 68%, transparent)",
           backdropFilter: "blur(30px) saturate(180%)",
           opacity: open ? 1 : 0,
           transform: open ? "translateY(0)" : "translateY(-8px)",
