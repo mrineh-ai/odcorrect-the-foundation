@@ -27,7 +27,7 @@ export function Footer() {
                 { to: "/about", label: "About" },
                 { to: "/collections", label: "Collections" },
                 { to: "/craftsmanship", label: "Craftsmanship" },
-                { to: "/founder", label: "Founder" },
+                
                 { to: "/journal", label: "Journal" },
 
                 { to: "/coming-soon", label: "Coming Soon" },

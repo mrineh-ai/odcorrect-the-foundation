@@ -15,7 +15,6 @@ import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as ComingSoonRouteImport } from './routes/coming-soon'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CraftsmanshipRouteImport } from './routes/craftsmanship'
-import { Route as FounderRouteImport } from './routes/founder'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -51,11 +50,6 @@ const CraftsmanshipRoute = CraftsmanshipRouteImport.update({
   path: '/craftsmanship',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FounderRoute = FounderRouteImport.update({
-  id: '/founder',
-  path: '/founder',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const JournalRoute = JournalRouteImport.update({
   id: '/journal',
   path: '/journal',
@@ -84,7 +78,6 @@ export interface FileRoutesByFullPath {
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
-  '/founder': typeof FounderRoute
   '/journal': typeof JournalRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -97,7 +90,6 @@ export interface FileRoutesByTo {
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
-  '/founder': typeof FounderRoute
   '/journal': typeof JournalRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -111,7 +103,6 @@ export interface FileRoutesById {
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
-  '/founder': typeof FounderRoute
   '/journal': typeof JournalRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -126,7 +117,6 @@ export interface FileRouteTypes {
     | '/coming-soon'
     | '/contact'
     | '/craftsmanship'
-    | '/founder'
     | '/journal'
     | '/privacy-policy'
     | '/sitemap.xml'
@@ -139,7 +129,6 @@ export interface FileRouteTypes {
     | '/coming-soon'
     | '/contact'
     | '/craftsmanship'
-    | '/founder'
     | '/journal'
     | '/privacy-policy'
     | '/sitemap.xml'
@@ -152,7 +141,6 @@ export interface FileRouteTypes {
     | '/coming-soon'
     | '/contact'
     | '/craftsmanship'
-    | '/founder'
     | '/journal'
     | '/privacy-policy'
     | '/sitemap.xml'
@@ -166,7 +154,6 @@ export interface RootRouteChildren {
   ComingSoonRoute: typeof ComingSoonRoute
   ContactRoute: typeof ContactRoute
   CraftsmanshipRoute: typeof CraftsmanshipRoute
-  FounderRoute: typeof FounderRoute
   JournalRoute: typeof JournalRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -217,13 +204,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CraftsmanshipRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/founder': {
-      id: '/founder'
-      path: '/founder'
-      fullPath: '/founder'
-      preLoaderRoute: typeof FounderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/journal': {
       id: '/journal'
       path: '/journal'
@@ -262,7 +242,6 @@ const rootRouteChildren: RootRouteChildren = {
   ComingSoonRoute: ComingSoonRoute,
   ContactRoute: ContactRoute,
   CraftsmanshipRoute: CraftsmanshipRoute,
-  FounderRoute: FounderRoute,
   JournalRoute: JournalRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -271,3 +250,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

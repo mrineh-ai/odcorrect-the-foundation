@@ -155,17 +155,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             description: SITE_DESCRIPTION,
             slogan: "Luxury. Without Compromise.",
             foundingDate: "2026",
-            founder: {
-              "@type": "Person",
-              name: "Mrinal Gahlaut",
-              jobTitle: "Founder & Chief Executive Officer",
-              url: `${SITE_URL}/founder`,
-            },
-            employee: {
-              "@type": "Person",
-              name: "Mrinal Gahlaut",
-              jobTitle: "Chief Executive Officer",
-            },
             email: "ceo@odcorrect.in",
             areaServed: "Worldwide",
             address: {
