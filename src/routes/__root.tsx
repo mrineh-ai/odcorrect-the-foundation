@@ -31,6 +31,17 @@ import {
 
 
 function NotFoundComponent() {
+  useEffect(() => {
+    document.title = "Page Not Found — ODCORRECT";
+    const tag = document.createElement("meta");
+    tag.name = "robots";
+    tag.content = "noindex, follow";
+    document.head.appendChild(tag);
+    return () => {
+      tag.remove();
+    };
+  }, []);
+
   return (
     <main className="flex min-h-dvh items-center justify-center bg-ink px-6">
       <div className="max-w-xl text-center">
