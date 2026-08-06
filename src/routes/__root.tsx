@@ -32,12 +32,15 @@ import {
 
 function NotFoundComponent() {
   useEffect(() => {
-    document.title = "Page Not Found — ODCORRECT";
+    const id = setTimeout(() => {
+      document.title = "Page Not Found — ODCORRECT";
+    }, 60);
     const tag = document.createElement("meta");
     tag.name = "robots";
     tag.content = "noindex, follow";
     document.head.appendChild(tag);
     return () => {
+      clearTimeout(id);
       tag.remove();
     };
   }, []);
