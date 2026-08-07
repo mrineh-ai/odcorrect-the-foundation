@@ -13,9 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/lux/Header";
 import { Footer } from "@/components/lux/Footer";
-import { Splash } from "@/components/lux/Splash";
 import { LuxCursor } from "@/components/lux/LuxCursor";
-import { RouteTransition } from "@/components/lux/RouteTransition";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import {
   SITE_URL,
@@ -327,9 +325,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Splash />
       <LuxCursor />
-      <RouteTransition />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[9999] focus:bg-charcoal focus:px-5 focus:py-3 focus:text-sm focus:text-gold"
