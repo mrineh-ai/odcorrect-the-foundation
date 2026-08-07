@@ -63,7 +63,7 @@ function Home() {
             objectPosition: "38% center",
             filter: "blur(9px)",
             transform: "scale(1.08)",
-            opacity: theme === "light" ? 0 : 0.55,
+            opacity: theme === "light" ? 0 : 0.72,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
         />
@@ -90,7 +90,7 @@ function Home() {
             background:
               theme === "light"
                 ? "linear-gradient(to right, rgba(5,5,5,0.62) 6%, rgba(5,5,5,0.18) 68%)"
-                : "linear-gradient(to right, rgba(5,5,5,0.88) 8%, rgba(5,5,5,0.42) 70%)",
+                : "linear-gradient(to right, rgba(5,5,5,0.78) 8%, rgba(5,5,5,0.42) 70%)",
             transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
           aria-hidden="true"
