@@ -63,8 +63,6 @@ function About() {
         eyebrow="The House"
         title="A house built before a collection."
         intro="ODCORRECT began not with a product, but with a standard — written down, agreed upon, and refused to be broken."
-        image={architecture}
-        imageAlt="Minimal dark stone architecture lit by a single shaft of light"
       />
 
       <section className="section-pad bg-background">

@@ -65,8 +65,6 @@ function Craftsmanship() {
         eyebrow="Craftsmanship"
         title="The unseen decides everything."
         intro="Quality is not applied at the end of a process. It is the entire process, from the first material decision to the final hand-finished edge."
-        image={atelier}
-        imageAlt="A tailor's atelier at night lit by a single brass lamp"
       />
 
       <section className="section-pad bg-background">

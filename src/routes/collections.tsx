@@ -39,8 +39,6 @@ function Collections() {
         eyebrow="Collections"
         title="Three disciplines. Nothing else."
         intro="Clothing, footwear and fragrance. Each will arrive only when it can be presented without apology."
-        image={journalMaterials}
-        imageAlt="Dark marble meeting brushed metal — a study in luxury materials"
       />
 
       {CATEGORIES.map((c, i) => (

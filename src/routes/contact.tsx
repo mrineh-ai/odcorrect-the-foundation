@@ -49,8 +49,6 @@ function Contact() {
         eyebrow="Contact"
         title="Write to the house."
         intro="Every message is read by someone who can act on it."
-        image={architecture}
-        imageAlt="Quiet dark stone interior with a single shaft of light"
       />
 
       <section className="section-pad bg-background">
