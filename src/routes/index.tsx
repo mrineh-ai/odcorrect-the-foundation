@@ -60,7 +60,9 @@ function Home() {
           fetchPriority="high"
           className="animate-drift absolute inset-0 h-full w-full object-cover"
           style={{
-            opacity: theme === "light" ? 0 : 0.55,
+            objectPosition: "80% center",
+            filter: "blur(9px)",
+                        opacity: theme === "light" ? 0 : 0.8,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
         />
@@ -73,17 +75,20 @@ function Home() {
           fetchPriority="high"
           className="animate-drift absolute inset-0 h-full w-full object-cover"
           style={{
-            opacity: theme === "light" ? 0.85 : 0,
+            objectPosition: "80% center",
+            filter: "blur(9px)",
+                        opacity: theme === "light" ? 0.85 : 0,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
         />
+
         <div
           className="absolute inset-0"
           style={{
             background:
               theme === "light"
-                ? "linear-gradient(to right, rgba(5,5,5,0.72) 6%, rgba(5,5,5,0.22) 68%)"
-                : "linear-gradient(to right, #050505 8%, rgba(5,5,5,0.45) 70%)",
+                ? "linear-gradient(to right, rgba(5,5,5,0.30) 6%, rgba(5,5,5,0.10) 68%)"
+                : "linear-gradient(to right, rgba(5,5,5,0.48) 8%, rgba(5,5,5,0.28) 70%)",
             transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
           aria-hidden="true"

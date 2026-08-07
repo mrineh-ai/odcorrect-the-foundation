@@ -97,7 +97,7 @@ export function Header() {
     className="transition-all duration-1000"
     style={{
       filter:
-        "contrast(1.3) saturate(1.16) brightness(1.06) drop-shadow(0 1px 3px oklch(0 0 0 / 30%))",
+        "contrast(1.32) saturate(1.2) brightness(1.12) drop-shadow(0 0 14px oklch(1 0 0 / 45%)) drop-shadow(0 0 34px oklch(1 0 0 / 28%))",
     }}
   />
 </Link>
