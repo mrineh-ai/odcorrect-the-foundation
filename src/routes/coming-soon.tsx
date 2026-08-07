@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import categoryFragrance from "@/assets/category-fragrance.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
 
@@ -42,8 +41,6 @@ function ComingSoon() {
         eyebrow="Coming Soon"
         title="Something is being made slowly."
         intro="No date has been promised, only a standard. When the first chapter is ready, the private list will know before anyone else."
-        image={categoryFragrance}
-        imageAlt="A weighted glass flacon with champagne gold cap on dark stone"
       />
 
       <section className="section-pad relative overflow-hidden bg-background">

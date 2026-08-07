@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import architecture from "@/assets/architecture.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
 import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
@@ -49,8 +48,6 @@ function Contact() {
         eyebrow="Contact"
         title="Write to the house."
         intro="Every message is read by someone who can act on it."
-        image={architecture}
-        imageAlt="Quiet dark stone interior with a single shaft of light"
       />
 
       <section className="section-pad bg-background">

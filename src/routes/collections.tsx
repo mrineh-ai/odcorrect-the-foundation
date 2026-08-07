@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import journalMaterials from "@/assets/journal-materials.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
 import { CATEGORIES } from "@/data/categories";
@@ -39,8 +38,6 @@ function Collections() {
         eyebrow="Collections"
         title="Three disciplines. Nothing else."
         intro="Clothing, footwear and fragrance. Each will arrive only when it can be presented without apology."
-        image={journalMaterials}
-        imageAlt="Dark marble meeting brushed metal — a study in luxury materials"
       />
 
       {CATEGORIES.map((c, i) => (

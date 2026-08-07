@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import craftHands from "@/assets/craft-hands.jpg";
 import craftFabric from "@/assets/craft-fabric.jpg";
-import atelier from "@/assets/atelier.jpg";
 import categoryFootwear from "@/assets/category-footwear.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
@@ -65,8 +64,6 @@ function Craftsmanship() {
         eyebrow="Craftsmanship"
         title="The unseen decides everything."
         intro="Quality is not applied at the end of a process. It is the entire process, from the first material decision to the final hand-finished edge."
-        image={atelier}
-        imageAlt="A tailor's atelier at night lit by a single brass lamp"
       />
 
       <section className="section-pad bg-background">
