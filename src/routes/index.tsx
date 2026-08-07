@@ -87,7 +87,7 @@ function Home() {
           style={{
             background:
               theme === "light"
-                ? "linear-gradient(to right, rgba(5,5,5,0.30) 6%, rgba(5,5,5,0.10) 68%)"
+                ? "linear-gradient(to right, rgba(5,5,5,0.66) 0%, rgba(5,5,5,0.52) 42%, rgba(5,5,5,0.16) 78%)"
                 : "linear-gradient(to right, rgba(5,5,5,0.48) 8%, rgba(5,5,5,0.28) 70%)",
             transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
@@ -97,7 +97,15 @@ function Home() {
         <DustField />
 
         <div className="shell relative pt-36 pb-24 lg:pt-40">
-          <div className="animate-lux-fade max-w-3xl">
+          <div
+            className="animate-lux-fade max-w-3xl"
+            style={{
+              textShadow:
+                theme === "light"
+                  ? "0 1px 24px rgba(5,5,5,0.55), 0 1px 3px rgba(5,5,5,0.45)"
+                  : "none",
+            }}
+          >
             <p className="eyebrow">The House of ODCORRECT</p>
             <h1 className="display-xl mt-10 text-foreground">
               Luxury.
