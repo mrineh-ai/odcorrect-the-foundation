@@ -27,7 +27,9 @@ export function Header() {
     const sync = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
-      setHidden(hero ? y > 64 : false);
+      // Once the user leaves the very top of the hero the header stays hidden,
+      // scrolling up included; it only returns at the top of the page.
+      setHidden(hero ? y > 4 : false);
     };
     sync();
     window.addEventListener("scroll", sync, { passive: true });
