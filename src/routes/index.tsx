@@ -89,7 +89,7 @@ function Home() {
         <div className="shell relative pt-36 pb-24 lg:pt-40">
           <div className="hero-content animate-lux-fade max-w-3xl">
             <p className="eyebrow">The House of ODCORRECT</p>
-            <h1 className="display-xl mt-10 text-foreground">
+            <h1 className="display-xl mt-10 text-primary">
               Luxury.
               <br />
               Without Compromise.
