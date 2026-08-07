@@ -405,6 +405,10 @@ html.light .hero-contrast-overlay {
   background: linear-gradient(to right, oklch(0.99 0.004 85 / 94%) 5%, oklch(0.99 0.004 85 / 72%) 58%, transparent 88%);
 }
 
+html.light .on-dark {
+  --foreground: oklch(0.08 0 0);
+}
+
 html.light .hero-content {
   color: oklch(0.08 0 0);
   text-shadow: 0 1px 18px oklch(1 0 0 / 70%);
