@@ -78,7 +78,7 @@ function Home() {
           style={{
             objectPosition: "0% center",
             filter: "blur(9px)",
-            transform: "scale(1.22) translateX(9%)",
+            transform: "scale(1.3) translateX(18%)",
             opacity: theme === "light" ? 0.85 : 0,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
