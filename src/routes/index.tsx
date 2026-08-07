@@ -87,7 +87,7 @@ function Home() {
           style={{
             background:
               theme === "light"
-                ? "linear-gradient(to right, rgba(5,5,5,0.30) 6%, rgba(5,5,5,0.10) 68%)"
+                ? "linear-gradient(to right, rgba(5,5,5,0.55) 6%, rgba(5,5,5,0.22) 68%)"
                 : "linear-gradient(to right, rgba(5,5,5,0.48) 8%, rgba(5,5,5,0.28) 70%)",
             transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
