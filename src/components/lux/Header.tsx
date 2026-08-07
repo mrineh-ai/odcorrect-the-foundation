@@ -35,7 +35,7 @@ export function Header() {
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => setHidden(!entry.isIntersecting),
+      (entries) => setHidden(!entries[0]?.isIntersecting),
       { threshold: 0, rootMargin: "-10% 0px 0px 0px" },
     );
     observer.observe(hero);
