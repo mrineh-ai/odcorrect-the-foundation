@@ -19,9 +19,6 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  // Header is tied to the hero: visible while the hero is in view, hidden the
-  // moment it leaves — regardless of scroll direction. Pages without a hero
-  // keep the header permanently visible.
   // Homepage: the header hides as soon as the user scrolls away from the top of
   // the hero and only returns when they scroll back up to it. Interior pages
   // have no hero, so the header stays visible at all times.
