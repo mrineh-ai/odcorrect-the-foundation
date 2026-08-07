@@ -410,6 +410,10 @@ html.light .hero-content {
   text-shadow: 0 1px 18px oklch(1 0 0 / 70%);
 }
 
+html.light .hero-content h1 {
+  color: oklch(0.08 0 0);
+}
+
 html.light .hero-content .eyebrow,
 html.light .hero-content .body-lux {
   color: oklch(0.16 0.01 85);
