@@ -411,7 +411,7 @@ html.light .hero-content {
 }
 
 html.light .hero-content h1 {
-  color: oklch(0.08 0 0);
+  color: oklch(0.08 0 0) !important;
 }
 
 html.light .hero-content .eyebrow,
