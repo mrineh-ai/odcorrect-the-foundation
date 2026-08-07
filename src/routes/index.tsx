@@ -82,22 +82,12 @@ function Home() {
           }}
         />
 
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              theme === "light"
-                ? "linear-gradient(to right, rgba(5,5,5,0.55) 6%, rgba(5,5,5,0.22) 68%)"
-                : "linear-gradient(to right, rgba(5,5,5,0.48) 8%, rgba(5,5,5,0.28) 70%)",
-            transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
-          }}
-          aria-hidden="true"
-        />
+        <div className="hero-contrast-overlay absolute inset-0" aria-hidden="true" />
 
         <DustField />
 
         <div className="shell relative pt-36 pb-24 lg:pt-40">
-          <div className="animate-lux-fade max-w-3xl">
+          <div className="hero-content animate-lux-fade max-w-3xl">
             <p className="eyebrow">The House of ODCORRECT</p>
             <h1 className="display-xl mt-10 text-foreground">
               Luxury.
