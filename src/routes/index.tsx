@@ -1,6 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDark from "@/assets/hero-editorial-dark.jpg";
-import heroLight from "@/assets/hero-editorial-light.jpg";
 import { useTheme } from "@/lib/theme";
 import craftFabric from "@/assets/craft-fabric.jpg";
 import craftHands from "@/assets/craft-hands.jpg";
