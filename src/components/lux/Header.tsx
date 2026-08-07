@@ -1,7 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
 
 
 const NAV = [
@@ -23,26 +22,19 @@ export function Header() {
   // Header is tied to the hero: visible while the hero is in view, hidden the
   // moment it leaves — regardless of scroll direction. Pages without a hero
   // keep the header permanently visible.
+  // Homepage: the header hides as soon as the user scrolls away from the top of
+  // the hero and only returns when they scroll back up to it. Interior pages
+  // have no hero, so the header stays visible at all times.
   useEffect(() => {
-    setScrolled(window.scrollY > 24);
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll, { passive: true });
-
     const hero = document.getElementById("hero");
-    if (!hero) {
-      setHidden(false);
-      return () => window.removeEventListener("scroll", onScroll);
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => setHidden(!entries[0]?.isIntersecting),
-      { threshold: 0, rootMargin: "-10% 0px 0px 0px" },
-    );
-    observer.observe(hero);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      observer.disconnect();
+    const sync = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      setHidden(hero ? y > 64 : false);
     };
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    return () => window.removeEventListener("scroll", sync);
   }, [pathname]);
 
 
@@ -118,7 +110,6 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <ThemeToggle />
           <Link
             to="/coming-soon"
             className="btn-lux-gold !px-7 !py-3"
@@ -129,7 +120,6 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4 lg:hidden">
-          <ThemeToggle />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}

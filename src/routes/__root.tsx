@@ -14,7 +14,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/lux/Header";
 import { Footer } from "@/components/lux/Footer";
 import { LuxCursor } from "@/components/lux/LuxCursor";
-import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import {
   SITE_URL,
   SITE_NAME,
@@ -107,16 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "publisher", content: "ODCORRECT" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "language", content: "en" },
-      {
-        name: "theme-color",
-        content: "#050505",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        name: "theme-color",
-        content: "#FAF8F5",
-        media: "(prefers-color-scheme: light)",
-      },
+      { name: "theme-color", content: "#050505" },
       { name: "msapplication-TileColor", content: "#050505" },
       { property: "og:site_name", content: SITE_NAME },
       { property: "og:locale", content: "en_IN" },
@@ -150,7 +140,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-      { children: THEME_INIT_SCRIPT },
       {
         type: "application/ld+json",
         children: JSON.stringify([
@@ -307,7 +296,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
