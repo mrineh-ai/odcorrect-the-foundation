@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import architecture from "@/assets/architecture.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
 import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";

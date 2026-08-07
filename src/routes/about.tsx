@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import architecture from "@/assets/architecture.jpg";
 import atelier from "@/assets/atelier.jpg";
 import journalFuture from "@/assets/journal-future.jpg";
 import { PageHero } from "@/components/lux/PageHero";

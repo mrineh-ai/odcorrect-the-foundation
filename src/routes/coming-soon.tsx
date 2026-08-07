@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import categoryFragrance from "@/assets/category-fragrance.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
 

@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import craftHands from "@/assets/craft-hands.jpg";
 import craftFabric from "@/assets/craft-fabric.jpg";
-import atelier from "@/assets/atelier.jpg";
 import categoryFootwear from "@/assets/category-footwear.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";

@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import journalPackaging from "@/assets/journal-packaging.jpg";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
 import { JournalCard } from "@/components/lux/JournalCard";
