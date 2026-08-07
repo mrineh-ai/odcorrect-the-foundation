@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroEditorial from "@/assets/hero-editorial.jpg";
+import heroDark from "@/assets/hero-editorial-dark.jpg";
+import heroLight from "@/assets/hero-editorial-light.jpg";
+import { useTheme } from "@/lib/theme";
 import craftFabric from "@/assets/craft-fabric.jpg";
 import craftHands from "@/assets/craft-hands.jpg";
 import architecture from "@/assets/architecture.jpg";
@@ -41,23 +43,52 @@ export const Route = createFileRoute("/")({
 
 
 function Home() {
+  const { theme } = useTheme();
+
   return (
     <main>
       {/* ——— Hero ——— */}
-      <section className="on-dark relative flex min-h-dvh items-center overflow-hidden bg-ink">
+      <section
+        id="hero"
+        className="on-dark relative flex min-h-dvh items-center overflow-hidden bg-ink"
+      >
         <img
-          src={heroEditorial}
-          alt="ODCORRECT editorial campaign — tailored charcoal overcoat under runway lighting"
+          src={heroDark}
+          alt="ODCORRECT editorial campaign — tailored black overcoat in a softly lit stone gallery"
           width={1920}
           height={1280}
           fetchPriority="high"
-          className="animate-drift absolute inset-0 h-full w-full object-cover opacity-45"
+          className="animate-drift absolute inset-0 h-full w-full object-cover"
+          style={{
+            opacity: theme === "light" ? 0 : 0.55,
+            transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
+          }}
+        />
+        <img
+          src={heroLight}
+          alt=""
+          aria-hidden="true"
+          width={1920}
+          height={1280}
+          fetchPriority="high"
+          className="animate-drift absolute inset-0 h-full w-full object-cover"
+          style={{
+            opacity: theme === "light" ? 0.85 : 0,
+            transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
+          }}
         />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, #050505 8%, rgba(5,5,5,0.45) 70%)" }}
+          style={{
+            background:
+              theme === "light"
+                ? "linear-gradient(to right, rgba(5,5,5,0.72) 6%, rgba(5,5,5,0.22) 68%)"
+                : "linear-gradient(to right, #050505 8%, rgba(5,5,5,0.45) 70%)",
+            transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
+          }}
           aria-hidden="true"
         />
+
         <DustField />
 
         <div className="shell relative pt-36 pb-24 lg:pt-40">

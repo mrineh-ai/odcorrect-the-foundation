@@ -20,32 +20,31 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
+  // Header is tied to the hero: visible while the hero is in view, hidden the
+  // moment it leaves — regardless of scroll direction. Pages without a hero
+  // keep the header permanently visible.
   useEffect(() => {
-    let last = window.scrollY;
-    let ticking = false;
-
-    const update = () => {
-      ticking = false;
-      const y = window.scrollY;
-      const delta = y - last;
-      setScrolled(y > 24);
-      // ignore micro-movements and rubber-banding to avoid flicker
-      if (Math.abs(delta) < 6 || y < 0) return;
-      if (delta > 0 && y > 120) setHidden(true);
-      else if (delta < 0) setHidden(false);
-      last = y;
-    };
-
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(update);
-    };
-
     setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+
+    const hero = document.getElementById("hero");
+    if (!hero) {
+      setHidden(false);
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => setHidden(!entries[0]?.isIntersecting),
+      { threshold: 0, rootMargin: "-10% 0px 0px 0px" },
+    );
+    observer.observe(hero);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+    };
+  }, [pathname]);
+
 
   useEffect(() => {
     setOpen(false);
