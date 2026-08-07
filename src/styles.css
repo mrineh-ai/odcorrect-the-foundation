@@ -402,37 +402,32 @@ html.light {
 }
 
 html.light .hero-contrast-overlay {
-  background: linear-gradient(to right, oklch(0.99 0.004 85 / 94%) 5%, oklch(0.99 0.004 85 / 72%) 58%, transparent 88%);
-}
-
-html.light .on-dark {
-  --foreground: oklch(0.08 0 0);
+  background: linear-gradient(to right, oklch(0.04 0 0 / 82%) 5%, oklch(0.04 0 0 / 62%) 58%, oklch(0.04 0 0 / 18%) 88%);
 }
 
 html.light .hero-content {
-  color: oklch(0.08 0 0);
-  text-shadow: 0 1px 18px oklch(1 0 0 / 70%);
+  color: oklch(0.98 0 0);
+  text-shadow: 0 2px 20px oklch(0 0 0 / 55%);
 }
 
 html.light .hero-content h1 {
-  color: oklch(0.08 0 0) !important;
+  color: oklch(0.98 0 0) !important;
 }
 
-html.light .hero-content .eyebrow,
 html.light .hero-content .body-lux {
-  color: oklch(0.16 0.01 85);
+  color: oklch(0.94 0 0);
 }
 
 html.light .hero-content .btn-lux-gold {
-  border-color: oklch(0.2 0.01 85);
-  background: oklch(0.1 0 0);
-  color: oklch(0.98 0.004 85);
+  border-color: var(--gold);
+  background: var(--gold);
+  color: oklch(0.08 0 0);
 }
 
 html.light .hero-content .btn-lux {
-  border-color: oklch(0.2 0.01 85 / 55%);
-  background: oklch(0.99 0.004 85 / 80%);
-  color: oklch(0.08 0 0);
+  border-color: oklch(1 0 0 / 72%);
+  background: oklch(0.04 0 0 / 26%);
+  color: oklch(0.98 0 0);
 }
 
 @utility hairline-t {
