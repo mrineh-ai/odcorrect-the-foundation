@@ -1,7 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroDark from "@/assets/hero-editorial-dark.jpg";
-import heroLight from "@/assets/hero-editorial-light.jpg";
-import { useTheme } from "@/lib/theme";
 import craftFabric from "@/assets/craft-fabric.jpg";
 import craftHands from "@/assets/craft-hands.jpg";
 import architecture from "@/assets/architecture.jpg";
@@ -43,8 +41,6 @@ export const Route = createFileRoute("/")({
 
 
 function Home() {
-  const { theme } = useTheme();
-
   return (
     <main>
       {/* ——— Hero ——— */}
@@ -62,23 +58,7 @@ function Home() {
           style={{
             objectPosition: "80% center",
             filter: "blur(9px)",
-                        opacity: theme === "light" ? 0 : 0.8,
-            transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
-          }}
-        />
-        <img
-          src={heroLight}
-          alt=""
-          aria-hidden="true"
-          width={1920}
-          height={1280}
-          fetchPriority="high"
-          className="animate-drift absolute inset-0 h-full w-full object-cover"
-          style={{
-            objectPosition: "80% center",
-            filter: "blur(9px)",
-                        opacity: theme === "light" ? 0.85 : 0,
-            transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
+                        opacity: 0.8,
           }}
         />
 
