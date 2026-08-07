@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useTheme } from "@/lib/theme";
+
 import craftFabric from "@/assets/craft-fabric.jpg";
 import craftHands from "@/assets/craft-hands.jpg";
 import architecture from "@/assets/architecture.jpg";
@@ -41,8 +41,6 @@ export const Route = createFileRoute("/")({
 
 
 function Home() {
-  const { theme } = useTheme();
-
   return (
     <main>
       {/* ——— Hero ——— */}
@@ -69,15 +67,7 @@ function Home() {
         <DustField />
 
         <div className="shell relative pt-36 pb-24 lg:pt-40">
-          <div
-            className="animate-lux-fade max-w-3xl"
-            style={{
-              textShadow:
-                theme === "light"
-                  ? "0 1px 24px rgba(5,5,5,0.55), 0 1px 3px rgba(5,5,5,0.45)"
-                  : "none",
-            }}
-          >
+          <div className="animate-lux-fade max-w-3xl">
             <p className="eyebrow">The House of ODCORRECT</p>
             <h1 className="display-xl mt-10 text-foreground">
               Luxury.
