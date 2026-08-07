@@ -89,7 +89,10 @@ function Home() {
         <div className="shell relative pt-36 pb-24 lg:pt-40">
           <div className="hero-content animate-lux-fade max-w-3xl">
             <p className="eyebrow">The House of ODCORRECT</p>
-            <h1 className="display-xl mt-10 text-primary">
+            <h1
+              className="display-xl mt-10"
+              style={{ color: theme === "light" ? "oklch(0.08 0 0)" : "oklch(0.966 0 0)" }}
+            >
               Luxury.
               <br />
               Without Compromise.
