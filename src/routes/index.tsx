@@ -62,7 +62,7 @@ function Home() {
           style={{
             objectPosition: "38% center",
             filter: "blur(9px)",
-            transform: "scale(1.08)",
+            transform: "scale(1.14) translateX(5%)",
             opacity: theme === "light" ? 0 : 0.72,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
@@ -76,9 +76,9 @@ function Home() {
           fetchPriority="high"
           className="animate-drift absolute inset-0 h-full w-full object-cover"
           style={{
-            objectPosition: "6% center",
+            objectPosition: "0% center",
             filter: "blur(9px)",
-            transform: "scale(1.08)",
+            transform: "scale(1.22) translateX(9%)",
             opacity: theme === "light" ? 0.85 : 0,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
