@@ -60,10 +60,9 @@ function Home() {
           fetchPriority="high"
           className="animate-drift absolute inset-0 h-full w-full object-cover"
           style={{
-            objectPosition: "38% center",
+            objectPosition: "80% center",
             filter: "blur(9px)",
-            transform: "scale(1.14) translateX(5%)",
-            opacity: theme === "light" ? 0 : 0.72,
+                        opacity: theme === "light" ? 0 : 0.8,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
         />
@@ -76,10 +75,9 @@ function Home() {
           fetchPriority="high"
           className="animate-drift absolute inset-0 h-full w-full object-cover"
           style={{
-            objectPosition: "0% center",
+            objectPosition: "80% center",
             filter: "blur(9px)",
-            transform: "scale(1.3) translateX(18%)",
-            opacity: theme === "light" ? 0.85 : 0,
+                        opacity: theme === "light" ? 0.85 : 0,
             transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
         />
@@ -89,8 +87,8 @@ function Home() {
           style={{
             background:
               theme === "light"
-                ? "linear-gradient(to right, rgba(5,5,5,0.62) 6%, rgba(5,5,5,0.18) 68%)"
-                : "linear-gradient(to right, rgba(5,5,5,0.78) 8%, rgba(5,5,5,0.42) 70%)",
+                ? "linear-gradient(to right, rgba(5,5,5,0.30) 6%, rgba(5,5,5,0.10) 68%)"
+                : "linear-gradient(to right, rgba(5,5,5,0.62) 8%, rgba(5,5,5,0.34) 70%)",
             transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
           aria-hidden="true"
