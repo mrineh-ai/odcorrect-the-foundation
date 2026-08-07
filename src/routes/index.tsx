@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-
+import heroDark from "@/assets/hero-editorial-dark.jpg";
+import heroLight from "@/assets/hero-editorial-light.jpg";
+import { useTheme } from "@/lib/theme";
 import craftFabric from "@/assets/craft-fabric.jpg";
 import craftHands from "@/assets/craft-hands.jpg";
 import architecture from "@/assets/architecture.jpg";
@@ -41,6 +43,8 @@ export const Route = createFileRoute("/")({
 
 
 function Home() {
+  const { theme } = useTheme();
+
   return (
     <main>
       {/* ——— Hero ——— */}
@@ -48,20 +52,46 @@ function Home() {
         id="hero"
         className="on-dark relative flex min-h-dvh items-center overflow-hidden bg-ink"
       >
-        {/* Cinematic gradient + subtle texture background (no photography) */}
+        <img
+          src={heroDark}
+          alt="ODCORRECT editorial campaign — tailored black overcoat in a softly lit stone gallery"
+          width={1920}
+          height={1280}
+          fetchPriority="high"
+          className="animate-drift absolute inset-0 h-full w-full object-cover"
+          style={{
+            objectPosition: "80% center",
+            filter: "blur(9px)",
+                        opacity: theme === "light" ? 0 : 0.8,
+            transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
+          }}
+        />
+        <img
+          src={heroLight}
+          alt=""
+          aria-hidden="true"
+          width={1920}
+          height={1280}
+          fetchPriority="high"
+          className="animate-drift absolute inset-0 h-full w-full object-cover"
+          style={{
+            objectPosition: "80% center",
+            filter: "blur(9px)",
+                        opacity: theme === "light" ? 0.85 : 0,
+            transition: "opacity 260ms cubic-bezier(0.16,1,0.3,1)",
+          }}
+        />
+
         <div
           className="absolute inset-0"
-          aria-hidden="true"
           style={{
-            backgroundImage: `
-              radial-gradient(ellipse 85% 70% at 18% 35%, oklch(0.745 0.073 85.5 / 0.09) 0%, transparent 55%),
-              radial-gradient(ellipse 55% 45% at 82% 82%, oklch(0.745 0.073 85.5 / 0.05) 0%, transparent 50%),
-              url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
-              linear-gradient(160deg, oklch(0.08 0 0) 0%, oklch(0.092 0 0) 45%, oklch(0.075 0 0) 100%)
-            `,
-            backgroundSize: "100% 100%, 220px 220px, 100% 100%",
-            backgroundBlendMode: "screen, overlay, normal",
+            background:
+              theme === "light"
+                ? "linear-gradient(to right, rgba(5,5,5,0.30) 6%, rgba(5,5,5,0.10) 68%)"
+                : "linear-gradient(to right, rgba(5,5,5,0.48) 8%, rgba(5,5,5,0.28) 70%)",
+            transition: "background 260ms cubic-bezier(0.16,1,0.3,1)",
           }}
+          aria-hidden="true"
         />
 
         <DustField />
