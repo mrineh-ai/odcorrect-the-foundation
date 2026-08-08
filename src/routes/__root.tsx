@@ -175,6 +175,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 availableLanguage: ["English"],
               },
             ],
+            parentOrganization: {
+              "@type": "Organization",
+              name: "Mrineh Group",
+              url: "https://mrinehgroup.online/",
+            },
             sameAs: [
               "https://www.instagram.com/odcorrect",
               "https://www.linkedin.com/company/odcorrect",
@@ -203,68 +208,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             isPartOf: { "@id": `${SITE_URL}/#website` },
             about: { "@id": `${SITE_URL}/#brand` },
             primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE },
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "@id": `${SITE_URL}/#house`,
-            name: "The House of ODCORRECT",
-            itemListElement: [
-              {
-                "@type": "ListItem",
-                position: 1,
-                item: {
-                  "@type": "Product",
-                  name: "Luxury Clothing",
-                  brand: { "@id": `${SITE_URL}/#brand` },
-                  description: "Timeless garments built to outlive trends.",
-                  image: OG_IMAGE,
-                  url: `${SITE_URL}/collections#clothing`,
-                  offers: {
-                    "@type": "Offer",
-                    availability: "https://schema.org/PreOrder",
-                    priceCurrency: "INR",
-                    url: `${SITE_URL}/coming-soon`,
-                  },
-                },
-              },
-              {
-                "@type": "ListItem",
-                position: 2,
-                item: {
-                  "@type": "Product",
-                  name: "Premium Footwear",
-                  brand: { "@id": `${SITE_URL}/#brand` },
-                  description: "Precision, comfort and enduring craftsmanship.",
-                  image: OG_IMAGE,
-                  url: `${SITE_URL}/collections#footwear`,
-                  offers: {
-                    "@type": "Offer",
-                    availability: "https://schema.org/PreOrder",
-                    priceCurrency: "INR",
-                    url: `${SITE_URL}/coming-soon`,
-                  },
-                },
-              },
-              {
-                "@type": "ListItem",
-                position: 3,
-                item: {
-                  "@type": "Product",
-                  name: "Signature Fragrances",
-                  brand: { "@id": `${SITE_URL}/#brand` },
-                  description: "Scents created to become signatures rather than trends.",
-                  image: OG_IMAGE,
-                  url: `${SITE_URL}/collections#fragrance`,
-                  offers: {
-                    "@type": "Offer",
-                    availability: "https://schema.org/PreOrder",
-                    priceCurrency: "INR",
-                    url: `${SITE_URL}/coming-soon`,
-                  },
-                },
-              },
-            ],
           },
           {
             "@context": "https://schema.org",
