@@ -16,7 +16,7 @@ export function NotifyForm({ compact = false, buttonLabel = "Notify Me", id = "n
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "error">("idle");
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!e.currentTarget.checkValidity()) return;
     setStatus("error");
