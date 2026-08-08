@@ -238,6 +238,17 @@
   }
 }
 
+.founder-link {
+  color: var(--foreground);
+  border-bottom: 1px solid color-mix(in oklch, var(--gold) 45%, transparent);
+  transition: color 220ms var(--ease-luxury), border-color 220ms var(--ease-luxury);
+}
+
+.founder-link:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
 /* Bordered ghost button */
 @utility btn-lux {
   display: inline-flex;
@@ -254,9 +265,13 @@
   text-transform: uppercase;
   color: var(--foreground);
   background: transparent;
+  box-shadow: 0 1px 0 color-mix(in oklch, var(--foreground) 10%, transparent), 0 2px 5px oklch(0 0 0 / 18%);
   transition:
-    color 900ms var(--ease-luxury),
-    border-color 900ms var(--ease-luxury);
+    color 220ms var(--ease-luxury),
+    border-color 220ms var(--ease-luxury),
+    background-color 220ms var(--ease-luxury),
+    box-shadow 220ms var(--ease-luxury),
+    transform 220ms var(--ease-luxury);
 
   &::before {
     content: "";
@@ -265,18 +280,26 @@
     background: var(--gold);
     transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform 900ms var(--ease-luxury);
+    transition: transform 220ms var(--ease-luxury);
     z-index: -1;
   }
 
   &:hover {
     color: var(--ink);
     border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 color-mix(in oklch, var(--foreground) 14%, transparent), 0 5px 10px oklch(0 0 0 / 20%);
   }
 
   &:hover::before {
     transform: scaleY(1);
     transform-origin: top;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px oklch(0 0 0 / 16%);
+    transition-duration: 120ms;
   }
 }
 
@@ -294,14 +317,70 @@
   text-transform: uppercase;
   color: var(--gold);
   background: transparent;
+  box-shadow: 0 1px 0 color-mix(in oklch, var(--gold) 24%, transparent), 0 2px 5px oklch(0 0 0 / 20%);
   transition:
-    color 900ms var(--ease-luxury),
-    background-color 900ms var(--ease-luxury);
+    color 220ms var(--ease-luxury),
+    background-color 220ms var(--ease-luxury),
+    box-shadow 220ms var(--ease-luxury),
+    transform 220ms var(--ease-luxury);
 
   &:hover {
     color: var(--ink);
     background-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 color-mix(in oklch, var(--gold) 30%, transparent), 0 5px 10px oklch(0 0 0 / 24%);
   }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px oklch(0 0 0 / 18%);
+    transition-duration: 120ms;
+  }
+}
+
+.form-field {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  padding-bottom: 0.75rem;
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  transition: border-color 220ms var(--ease-luxury), box-shadow 220ms var(--ease-luxury);
+}
+
+.form-field::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 60%, transparent);
+}
+
+.form-field:focus {
+  border-color: var(--gold);
+  box-shadow: 0 1px 0 color-mix(in oklch, var(--gold) 35%, transparent);
+  outline: none;
+}
+
+.form-field[aria-invalid="true"] {
+  border-color: var(--destructive);
+}
+
+.journal-card {
+  transition: color 220ms var(--ease-luxury);
+}
+
+.journal-card .journal-card-copy {
+  transition: transform 220ms var(--ease-luxury);
+}
+
+.journal-card:hover .journal-card-copy,
+.journal-card:focus-visible .journal-card-copy {
+  transform: translateY(-2px);
+}
+
+.journal-card:hover .img-zoom,
+.journal-card:focus-visible .img-zoom {
+  transform: scale(1.035);
 }
 
 /* Soft image zoom on hover */

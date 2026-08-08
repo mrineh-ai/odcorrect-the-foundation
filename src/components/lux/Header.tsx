@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Logo } from "./Logo";
 
 
@@ -19,21 +19,48 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  // Homepage: the header hides as soon as the user scrolls away from the top of
-  // the hero and only returns when they scroll back up to it. Interior pages
-  // have no hero, so the header stays visible at all times.
-  useEffect(() => {
-    const hero = document.getElementById("hero");
-    const sync = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      // Once the user leaves the very top of the hero the header stays hidden,
-      // scrolling up included; it only returns at the top of the page.
-      setHidden(hero ? y > 4 : false);
+  // A single page-position observer controls visibility. It never uses scroll
+  // direction: the home page watches its hero, while every other route watches
+  // the shared top sentinel rendered by the root layout.
+  useLayoutEffect(() => {
+    setHidden(false);
+    setScrolled(false);
+
+    const frame = window.requestAnimationFrame(() => {
+      const target =
+        pathname === "/"
+          ? document.getElementById("hero")
+          : document.getElementById("page-top-sentinel");
+
+      if (!target) {
+        setHidden(window.scrollY > 24);
+        setScrolled(window.scrollY > 24);
+        return;
+      }
+
+      const rect = target.getBoundingClientRect();
+      const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      setHidden(!isVisible);
+      setScrolled(!isVisible);
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry) return;
+          setHidden(!entry.isIntersecting);
+          setScrolled(!entry.isIntersecting);
+        },
+        { threshold: 0 },
+      );
+
+      observer.observe(target);
+      observerRef = observer;
+    });
+
+    let observerRef: IntersectionObserver | undefined;
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observerRef?.disconnect();
     };
-    sync();
-    window.addEventListener("scroll", sync, { passive: true });
-    return () => window.removeEventListener("scroll", sync);
   }, [pathname]);
 
 

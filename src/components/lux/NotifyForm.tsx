@@ -9,18 +9,17 @@ interface NotifyFormProps {
 
 /**
  * Newsletter / launch-notification capture.
- * Presentation-only today; the submit handler is the single seam where a
- * backend (Lovable Cloud) or CRM integration will later be attached.
+ * The form remains honest until a mailing-list endpoint is connected: it
+ * never reports a successful subscription without a confirmed submission.
  */
 export function NotifyForm({ compact = false, buttonLabel = "Notify Me", id = "notify" }: NotifyFormProps) {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "done">("idle");
+  const [status, setStatus] = useState<"idle" | "error">("idle");
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email) return;
-    setStatus("done");
-    setEmail("");
+    if (!e.currentTarget.checkValidity()) return;
+    setStatus("error");
   };
 
   return (
@@ -40,13 +39,16 @@ export function NotifyForm({ compact = false, buttonLabel = "Notify Me", id = "n
             required
             autoComplete="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setStatus("idle");
+            }}
+            aria-invalid={status === "error"}
             placeholder="you@example.com"
-            className="mt-4 w-full border-0 border-b border-border bg-transparent pb-3 text-base font-light tracking-[0.1em] text-foreground placeholder:text-muted-foreground/60 focus:border-gold focus:outline-none"
-            style={{ transition: "border-color 900ms cubic-bezier(0.16,1,0.3,1)" }}
+            className="form-field mt-4"
           />
         </div>
-        <button type="submit" className="btn-lux shrink-0">
+        <button type="submit" className="btn-lux-gold shrink-0">
           {buttonLabel}
         </button>
       </div>
@@ -54,10 +56,11 @@ export function NotifyForm({ compact = false, buttonLabel = "Notify Me", id = "n
         id={`${id}-status`}
         role="status"
         aria-live="polite"
-        className="mt-5 text-xs font-light tracking-[0.22em] text-gold"
-        style={{ opacity: status === "done" ? 1 : 0, transition: "opacity 900ms" }}
+        className="mt-5 min-h-5 text-xs font-light tracking-[0.16em] text-muted-foreground"
       >
-        {status === "done" ? "Thank you. You are on the list." : "\u00A0"}
+        {status === "error"
+          ? "Online registration is not available yet. Please try again later."
+          : "\u00A0"}
       </p>
     </form>
   );

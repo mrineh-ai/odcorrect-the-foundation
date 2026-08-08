@@ -321,6 +321,11 @@ function RootComponent() {
       >
         Skip to content
       </a>
+      <div
+        id="page-top-sentinel"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-6"
+      />
       <Header />
       <div id="main">
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
