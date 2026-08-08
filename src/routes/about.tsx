@@ -129,7 +129,16 @@ function About() {
             <p className="eyebrow">Origin</p>
             <h2 className="display-lg mt-8 text-foreground">Founded on refusal.</h2>
             <p className="body-lux mt-10">
-              The house was founded by Mrinal Gahlaut on a simple and uncomfortable premise:
+              The house was founded by{" "}
+              <a
+                href="https://mrinalgahlaut.mrinehgroup.online/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="founder-link"
+              >
+                Mrinal Gahlaut
+              </a>{" "}
+              on a simple and uncomfortable premise:
               that most of what is produced does not need to exist. Rather than adding to it,
               ODCORRECT begins by deciding what it will refuse to make.
             </p>

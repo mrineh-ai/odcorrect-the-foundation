@@ -31,16 +31,16 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "error">("idle");
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
-    e.currentTarget.reset();
+    if (!e.currentTarget.checkValidity()) return;
+    setStatus("error");
   };
 
   const field =
-    "mt-4 w-full border-0 border-b border-border bg-transparent pb-3 text-base font-light tracking-[0.08em] text-foreground placeholder:text-muted-foreground/50 focus:border-gold focus:outline-none";
+    "form-field mt-4";
 
   return (
     <main>
@@ -79,7 +79,12 @@ function Contact() {
           </Reveal>
 
           <Reveal delay={140} className="lg:col-span-8">
-            <form onSubmit={onSubmit} className="max-w-2xl" aria-describedby="contact-status">
+            <form
+              onSubmit={onSubmit}
+              onChange={() => setStatus("idle")}
+              className="max-w-2xl"
+              aria-describedby="contact-status"
+            >
               <div className="grid gap-12 sm:grid-cols-2">
                 <div>
                   <label htmlFor="c-name" className="eyebrow-muted block">
@@ -122,7 +127,7 @@ function Contact() {
                 />
               </div>
               <div className="mt-14">
-                <button type="submit" className="btn-lux">
+                <button type="submit" className="btn-lux-gold">
                   Send Message
                 </button>
               </div>
@@ -130,10 +135,19 @@ function Contact() {
                 id="contact-status"
                 role="status"
                 aria-live="polite"
-                className="mt-8 text-xs font-light tracking-[0.22em] text-gold"
-                style={{ opacity: sent ? 1 : 0, transition: "opacity 900ms" }}
+                className="mt-8 min-h-5 text-xs font-light tracking-[0.16em] text-muted-foreground"
               >
-                {sent ? "Thank you. Your message has been received." : "\u00A0"}
+                {status === "error" ? (
+                  <>
+                    Online delivery is not available yet. Please write to{" "}
+                    <a href="mailto:ceo@odcorrect.in" className="text-gold hover:underline">
+                      ceo@odcorrect.in
+                    </a>
+                    .
+                  </>
+                ) : (
+                  "\u00A0"
+                )}
               </p>
             </form>
           </Reveal>
