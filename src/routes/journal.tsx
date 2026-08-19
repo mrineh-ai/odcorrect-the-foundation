@@ -66,7 +66,7 @@ function Journal() {
               New chapters, launch announcements and exclusive previews, sent rarely.
             </p>
             <div className="mt-10">
-              <NotifyForm id="journal-notify" buttonLabel="Subscribe" />
+              <NotifyForm id="journal-notify" buttonLabel="Subscribe" source="journal" />
             </div>
             <div className="mt-10">
               <Link to="/about" className="link-lux">

@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useState, type FormEvent } from "react";
 import { PageHero } from "@/components/lux/PageHero";
 import { Reveal } from "@/components/lux/Reveal";
+import { sendEnquiry } from "@/lib/forms.functions";
 import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
@@ -31,13 +33,35 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [message, setMessage] = useState("");
+  const submit = useServerFn(sendEnquiry);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!e.currentTarget.checkValidity()) return;
-    setStatus("error");
+    const form = e.currentTarget;
+    if (!form.checkValidity()) return;
+    const values = new FormData(form);
+    setStatus("sending");
+    try {
+      const result = await submit({
+        data: {
+          name: String(values.get("name") ?? ""),
+          email: String(values.get("email") ?? ""),
+          subject: String(values.get("subject") ?? "") || undefined,
+          message: String(values.get("message") ?? ""),
+          company: String(values.get("company") ?? "") || undefined,
+        },
+      });
+      setStatus(result.ok ? "done" : "error");
+      setMessage(result.message);
+      if (result.ok) form.reset();
+    } catch {
+      setStatus("error");
+      setMessage("Something interrupted us. Please write to ceo@odcorrect.in instead.");
+    }
   };
+
 
   const field =
     "form-field mt-4";
@@ -81,7 +105,10 @@ function Contact() {
           <Reveal delay={140} className="lg:col-span-8">
             <form
               onSubmit={onSubmit}
-              onChange={() => setStatus("idle")}
+              onChange={() => {
+                setStatus("idle");
+                setMessage("");
+              }}
               className="max-w-2xl"
               aria-describedby="contact-status"
             >
@@ -126,9 +153,16 @@ function Contact() {
                   placeholder="How may we help?"
                 />
               </div>
+
+              {/* Honeypot — hidden from people, tempting to bots. */}
+              <div aria-hidden="true" className="absolute h-0 w-0 overflow-hidden opacity-0">
+                <label htmlFor="c-company">Company</label>
+                <input id="c-company" name="company" tabIndex={-1} autoComplete="off" />
+              </div>
+
               <div className="mt-14">
-                <button type="submit" className="btn-lux-gold">
-                  Send Message
+                <button type="submit" className="btn-lux-gold" disabled={status === "sending"}>
+                  {status === "sending" ? "Sending" : "Send Message"}
                 </button>
               </div>
               <p
@@ -137,17 +171,7 @@ function Contact() {
                 aria-live="polite"
                 className="mt-8 min-h-5 text-xs font-light tracking-[0.16em] text-muted-foreground"
               >
-                {status === "error" ? (
-                  <>
-                    Online delivery is not available yet. Please write to{" "}
-                    <a href="mailto:ceo@odcorrect.in" className="text-gold hover:underline">
-                      ceo@odcorrect.in
-                    </a>
-                    .
-                  </>
-                ) : (
-                  "\u00A0"
-                )}
+                {message || "\u00A0"}
               </p>
             </form>
           </Reveal>
