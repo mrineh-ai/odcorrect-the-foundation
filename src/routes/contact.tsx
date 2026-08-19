@@ -105,7 +105,10 @@ function Contact() {
           <Reveal delay={140} className="lg:col-span-8">
             <form
               onSubmit={onSubmit}
-              onChange={() => setStatus("idle")}
+              onChange={() => {
+                setStatus("idle");
+                setMessage("");
+              }}
               className="max-w-2xl"
               aria-describedby="contact-status"
             >
@@ -150,9 +153,16 @@ function Contact() {
                   placeholder="How may we help?"
                 />
               </div>
+
+              {/* Honeypot — hidden from people, tempting to bots. */}
+              <div aria-hidden="true" className="absolute h-0 w-0 overflow-hidden opacity-0">
+                <label htmlFor="c-company">Company</label>
+                <input id="c-company" name="company" tabIndex={-1} autoComplete="off" />
+              </div>
+
               <div className="mt-14">
-                <button type="submit" className="btn-lux-gold">
-                  Send Message
+                <button type="submit" className="btn-lux-gold" disabled={status === "sending"}>
+                  {status === "sending" ? "Sending" : "Send Message"}
                 </button>
               </div>
               <p
@@ -161,18 +171,10 @@ function Contact() {
                 aria-live="polite"
                 className="mt-8 min-h-5 text-xs font-light tracking-[0.16em] text-muted-foreground"
               >
-                {status === "error" ? (
-                  <>
-                    Online delivery is not available yet. Please write to{" "}
-                    <a href="mailto:ceo@odcorrect.in" className="text-gold hover:underline">
-                      ceo@odcorrect.in
-                    </a>
-                    .
-                  </>
-                ) : (
-                  "\u00A0"
-                )}
+                {message || "\u00A0"}
               </p>
+            </form>
+
             </form>
           </Reveal>
         </div>
