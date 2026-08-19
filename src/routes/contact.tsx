@@ -174,8 +174,6 @@ function Contact() {
                 {message || "\u00A0"}
               </p>
             </form>
-
-            </form>
           </Reveal>
         </div>
       </section>
