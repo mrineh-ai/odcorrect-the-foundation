@@ -31,13 +31,35 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [message, setMessage] = useState("");
+  const submit = useServerFn(sendEnquiry);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!e.currentTarget.checkValidity()) return;
-    setStatus("error");
+    const form = e.currentTarget;
+    if (!form.checkValidity()) return;
+    const values = new FormData(form);
+    setStatus("sending");
+    try {
+      const result = await submit({
+        data: {
+          name: String(values.get("name") ?? ""),
+          email: String(values.get("email") ?? ""),
+          subject: String(values.get("subject") ?? "") || undefined,
+          message: String(values.get("message") ?? ""),
+          company: String(values.get("company") ?? "") || undefined,
+        },
+      });
+      setStatus(result.ok ? "done" : "error");
+      setMessage(result.message);
+      if (result.ok) form.reset();
+    } catch {
+      setStatus("error");
+      setMessage("Something interrupted us. Please write to ceo@odcorrect.in instead.");
+    }
   };
+
 
   const field =
     "form-field mt-4";
