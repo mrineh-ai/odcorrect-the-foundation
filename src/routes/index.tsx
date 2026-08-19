@@ -314,7 +314,7 @@ function Home() {
                 Launch announcements and first access. Rarely sent. Never shared.
               </p>
               <div className="mt-8">
-                <NotifyForm id="home-notify" buttonLabel="Subscribe" />
+                <NotifyForm id="home-notify" buttonLabel="Subscribe" source="home" />
               </div>
             </Reveal>
           </div>

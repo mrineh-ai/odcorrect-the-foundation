@@ -52,7 +52,7 @@ function ComingSoon() {
               Be told first, and told quietly.
             </h2>
             <div className="mt-10">
-              <NotifyForm id="cs-notify" />
+              <NotifyForm id="cs-notify" source="coming-soon" />
             </div>
           </Reveal>
         </div>
