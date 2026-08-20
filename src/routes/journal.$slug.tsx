@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Reveal } from "@/components/lux/Reveal";
-import { JOURNAL_ENTRIES, getJournalEntry, getNextJournalEntry } from "@/data/journal";
+import { getJournalEntry, getNextJournalEntry } from "@/data/journal";
 import { absoluteUrl, breadcrumbLd, SITE_URL, LOGO_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/journal/$slug")({
@@ -192,4 +192,3 @@ function JournalArticle() {
   );
 }
 
-export const JOURNAL_SLUGS = JOURNAL_ENTRIES.map((entry) => entry.slug);
