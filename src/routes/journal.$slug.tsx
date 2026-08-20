@@ -117,7 +117,7 @@ function JournalArticle() {
           </div>
         </header>
 
-        <div className="section-pad bg-ink pt-16">
+        <div className="section-pad bg-ink pb-0 pt-16">
           <div className="shell">
             <Reveal>
               <div className="overflow-hidden bg-charcoal">
@@ -134,7 +134,7 @@ function JournalArticle() {
         </div>
 
         <div className="section-pad bg-background pt-0">
-          <div className="shell max-w-2xl pt-24">
+          <div className="shell max-w-2xl pt-20">
             <Reveal>
               <p className="body-lux text-lg leading-relaxed text-foreground/90">
                 {entry.excerpt}
