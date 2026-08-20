@@ -8,17 +8,19 @@ export interface JournalEntry {
   excerpt: string;
   image: string;
   readingTime: string;
+  publishedAt: string;
+  body: string[];
 }
 
 export function JournalCard({ entry, delay = 0 }: { entry: JournalEntry; delay?: number }) {
   return (
     <Reveal as="article" delay={delay} className="group" >
       <Link
-        to="/journal"
-        hash={entry.slug}
+        to="/journal/$slug"
+        params={{ slug: entry.slug }}
         id={entry.slug}
         className="journal-card block focus-visible:outline-none"
-        aria-label={`${entry.title} — ${entry.readingTime}`}
+        aria-label={`Read ${entry.title}`}
       >
       <div className="overflow-hidden bg-charcoal">
         <img

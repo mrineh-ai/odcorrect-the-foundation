@@ -42,6 +42,10 @@ const SECTIONS = [
     body: "We do not sell, rent or trade personal information. Data may be processed by service providers who host this site or deliver our correspondence, strictly on our instruction and under confidentiality.",
   },
   {
+    title: "Storage",
+    body: "Details submitted through this site are stored in an access-controlled database used solely by the house. Submissions cannot be read publicly, and access is limited to the person answering your message.",
+  },
+  {
     title: "Cookies",
     body: "This site uses only the storage required for it to function, such as remembering that you have already seen our introduction during a visit. No advertising trackers are used.",
   },
