@@ -251,9 +251,16 @@ function Home() {
                 {featured.title}
               </h2>
               <p className="body-lux mt-6">{featured.excerpt}</p>
-              <div className="mt-10">
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  to="/journal/$slug"
+                  params={{ slug: featured.slug }}
+                  className="btn-lux-gold"
+                >
+                  Read This Chapter
+                </Link>
                 <Link to="/journal" className="btn-lux">
-                  Read the Journal
+                  The Journal
                 </Link>
               </div>
             </Reveal>
