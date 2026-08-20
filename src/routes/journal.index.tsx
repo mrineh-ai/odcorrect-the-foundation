@@ -6,7 +6,7 @@ import { NotifyForm } from "@/components/lux/NotifyForm";
 import { JOURNAL_ENTRIES } from "@/data/journal";
 import { absoluteUrl, breadcrumbLd, OG_IMAGE } from "@/lib/seo";
 
-export const Route = createFileRoute("/journal")({
+export const Route = createFileRoute("/journal/")({
   head: () => ({
     meta: [
       { title: "The Journal — Notes From The House | ODCORRECT" },
