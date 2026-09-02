@@ -64,7 +64,7 @@ function AdminPage() {
         {data ? (
           <>
             <section className="mt-20">
-              <h2 className="display-sm text-foreground">
+              <h2 className="display-md text-foreground">
                 Enquiries{" "}
                 <span className="eyebrow-muted align-middle">({data.enquiries.length})</span>
               </h2>
@@ -92,7 +92,7 @@ function AdminPage() {
             </section>
 
             <section className="mt-24">
-              <h2 className="display-sm text-foreground">
+              <h2 className="display-md text-foreground">
                 Private List{" "}
                 <span className="eyebrow-muted align-middle">({data.waitlist.length})</span>
               </h2>
