@@ -6,7 +6,7 @@
  */
 export const SITE_URL = "https://odcorrect.in";
 export const SITE_NAME = "ODCORRECT";
-export const OG_IMAGE = `${SITE_URL}/odcorrect-logo.png`;
+export const OG_IMAGE = `${SITE_URL}/odcorrect-og.jpg`;
 export const LOGO_URL = `${SITE_URL}/odcorrect-logo.png`;
 
 export const SITE_TITLE =
