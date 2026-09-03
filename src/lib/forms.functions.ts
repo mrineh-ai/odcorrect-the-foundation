@@ -27,10 +27,16 @@ export const joinWaitlist = createServerFn({ method: "POST" })
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const { error } = await supabaseAdmin.from("waitlist").insert({
-      email: data.email.toLowerCase(),
-      source: data.source ?? null,
-    });
+    const email = data.email.toLowerCase();
+
+    const { data: inserted, error } = await supabaseAdmin
+      .from("waitlist")
+      .insert({
+        email,
+        source: data.source ?? null,
+      })
+      .select("id")
+      .maybeSingle();
 
     // 23505 = unique violation: the address is already on the list.
     if (error && error.code !== "23505") {
@@ -39,6 +45,18 @@ export const joinWaitlist = createServerFn({ method: "POST" })
         ok: false,
         message: "Something interrupted us. Please try again in a moment.",
       };
+    }
+
+    // Only welcome genuinely new entries; a repeat submission stays silent.
+    if (!error && inserted) {
+      try {
+        const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+        await sendTemplateEmail("waitlist-welcome", email, {
+          idempotencyKey: `waitlist-welcome-${inserted.id}`,
+        });
+      } catch (emailError) {
+        console.error("waitlist welcome email failed", emailError);
+      }
     }
 
     return {
