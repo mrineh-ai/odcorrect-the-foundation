@@ -27,10 +27,16 @@ export const joinWaitlist = createServerFn({ method: "POST" })
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const { error } = await supabaseAdmin.from("waitlist").insert({
-      email: data.email.toLowerCase(),
-      source: data.source ?? null,
-    });
+    const email = data.email.toLowerCase();
+
+    const { data: inserted, error } = await supabaseAdmin
+      .from("waitlist")
+      .insert({
+        email,
+        source: data.source ?? null,
+      })
+      .select("id")
+      .maybeSingle();
 
     // 23505 = unique violation: the address is already on the list.
     if (error && error.code !== "23505") {
@@ -39,6 +45,18 @@ export const joinWaitlist = createServerFn({ method: "POST" })
         ok: false,
         message: "Something interrupted us. Please try again in a moment.",
       };
+    }
+
+    // Only welcome genuinely new entries; a repeat submission stays silent.
+    if (!error && inserted) {
+      try {
+        const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+        await sendTemplateEmail("waitlist-welcome", email, {
+          idempotencyKey: `waitlist-welcome-${inserted.id}`,
+        });
+      } catch (emailError) {
+        console.error("waitlist welcome email failed", emailError);
+      }
     }
 
     return {
@@ -56,12 +74,18 @@ export const sendEnquiry = createServerFn({ method: "POST" })
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const { error } = await supabaseAdmin.from("enquiries").insert({
-      name: data.name,
-      email: data.email.toLowerCase(),
-      subject: data.subject ?? null,
-      message: data.message,
-    });
+    const email = data.email.toLowerCase();
+
+    const { data: inserted, error } = await supabaseAdmin
+      .from("enquiries")
+      .insert({
+        name: data.name,
+        email,
+        subject: data.subject ?? null,
+        message: data.message,
+      })
+      .select("id")
+      .single();
 
     if (error) {
       console.error("enquiry insert failed", error);
@@ -69,6 +93,37 @@ export const sendEnquiry = createServerFn({ method: "POST" })
         ok: false,
         message: "Something interrupted us. Please write to ceo@odcorrect.in instead.",
       };
+    }
+
+    try {
+      const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+      const receivedAt = new Date().toLocaleString("en-IN", {
+        dateStyle: "long",
+        timeStyle: "short",
+        timeZone: "Asia/Kolkata",
+      });
+
+      // Alert the house, then acknowledge the sender.
+      await sendTemplateEmail("enquiry-notification", "ceo@odcorrect.in", {
+        templateData: {
+          name: data.name,
+          email,
+          subject: data.subject ?? "",
+          message: data.message,
+          receivedAt: `${receivedAt} IST`,
+        },
+        idempotencyKey: `enquiry-notification-${inserted.id}`,
+        replyTo: email,
+      });
+
+      await sendTemplateEmail("enquiry-confirmation", email, {
+        templateData: { name: data.name, message: data.message },
+        idempotencyKey: `enquiry-confirmation-${inserted.id}`,
+        replyTo: "ceo@odcorrect.in",
+      });
+    } catch (emailError) {
+      // The enquiry is safely stored; a delivery problem must not break the form.
+      console.error("enquiry email failed", emailError);
     }
 
     return {
