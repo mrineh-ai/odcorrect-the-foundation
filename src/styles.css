@@ -348,6 +348,57 @@
   }
 }
 
+/* Boutique CTA — quiet tactile depth, no gloss */
+@utility btn-shop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklch, var(--gold) 62%, transparent);
+  background: color-mix(in oklch, var(--gold) 12%, transparent);
+  padding: 0.85rem 2.1rem;
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch, var(--gold) 22%, transparent),
+    0 2px 6px oklch(0 0 0 / 26%);
+  transition:
+    background-color 200ms var(--ease-luxury),
+    color 200ms var(--ease-luxury),
+    box-shadow 200ms var(--ease-luxury),
+    transform 200ms var(--ease-luxury);
+
+  &:hover {
+    color: var(--ink);
+    background: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px oklch(0 0 0 / 30%);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px oklch(0 0 0 / 24%);
+    transition-duration: 110ms;
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shop {
+    transition: none;
+  }
+  .btn-shop:hover,
+  .btn-shop:active {
+    transform: none;
+  }
+}
+
 .form-field {
   width: 100%;
   border: 0;

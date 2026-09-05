@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/lux/Header";
 import { Footer } from "@/components/lux/Footer";
 import { LuxCursor } from "@/components/lux/LuxCursor";
+import { CartProvider } from "@/lib/cart";
 import {
   SITE_URL,
   SITE_NAME,
@@ -259,6 +260,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <CartProvider>
       <LuxCursor />
       <a
         href="#main"
@@ -277,6 +279,7 @@ function RootComponent() {
         <Outlet />
       </div>
       <Footer />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
