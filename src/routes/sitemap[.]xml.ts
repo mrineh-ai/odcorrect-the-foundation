@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { JOURNAL_ENTRIES } from "@/data/journal";
+import { PRODUCTS } from "@/data/products";
 
 const BASE_URL = "https://odcorrect.in";
 
@@ -27,6 +28,12 @@ export const Route = createFileRoute("/sitemap.xml")({
             changefreq: "yearly" as const,
             priority: "0.6",
             lastmod: entry.publishedAt,
+          })),
+          { path: "/shop", changefreq: "weekly", priority: "0.9" },
+          ...PRODUCTS.map((product) => ({
+            path: `/shop/${product.slug}`,
+            changefreq: "weekly" as const,
+            priority: "0.7",
           })),
           { path: "/coming-soon", changefreq: "weekly", priority: "0.9" },
           { path: "/contact", changefreq: "yearly", priority: "0.5" },
