@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { listSubmissions } from "@/lib/admin.functions";
+import { PRODUCTS, formatPrice } from "@/data/products";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -116,6 +117,30 @@ function AdminPage() {
             </section>
           </>
         ) : null}
+
+        <section className="mt-24">
+          <h2 className="display-md text-foreground">
+            Catalogue{" "}
+            <span className="eyebrow-muted align-middle">({PRODUCTS.length})</span>
+          </h2>
+          <p className="body-lux mt-6 max-w-2xl">
+            The boutique currently shows preview pieces. Each row below is one piece with its
+            reference, price and total stock across variants. Editing here — images, prices,
+            variants, inventory and orders — opens once real pieces replace the previews.
+          </p>
+          <ul className="mt-10 divide-y divide-border border-y border-border">
+            {PRODUCTS.map((product) => (
+              <li key={product.id} className="flex flex-wrap items-baseline justify-between gap-3 py-5">
+                <span className="text-foreground">{product.name}</span>
+                <span className="eyebrow-muted">
+                  {product.sku} · {formatPrice(product.price)} ·{" "}
+                  {product.variants.reduce((n, v) => n + v.stock, 0)} in stock ·{" "}
+                  {product.status}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </main>
   );
