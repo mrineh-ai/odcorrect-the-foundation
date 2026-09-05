@@ -137,17 +137,34 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-5 lg:flex">
           <Link
             to="/coming-soon"
-            className="btn-lux-gold !px-7 !py-3"
-            style={{ color: "oklch(0.98 0 0 / 0.95)", borderColor: "oklch(0.98 0 0 / 0.55)" }}
+            className="link-lux"
+            style={{ color: "oklch(0.98 0 0 / 0.92)" }}
           >
             Notify Me
+          </Link>
+          <Link to="/shop" className="btn-shop">
+            Shop
+          </Link>
+          <Link
+            to="/cart"
+            aria-label={`Cart${ready && count > 0 ? `, ${count} items` : ""}`}
+            className="relative px-1 text-[0.66rem] uppercase tracking-[0.3em] transition-colors duration-300 hover:text-gold"
+            style={{ color: "oklch(0.98 0 0 / 0.92)" }}
+          >
+            Cart
+            {ready && count > 0 ? (
+              <span className="ml-2 text-gold">({count})</span>
+            ) : null}
           </Link>
         </div>
 
         <div className="flex items-center gap-4 lg:hidden">
+          <Link to="/shop" className="btn-shop !px-5 !py-2.5">
+            Shop
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -210,8 +227,14 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="mt-14">
-          <Link to="/coming-soon" className="btn-lux-gold" tabIndex={open ? 0 : -1}>
+        <div className="mt-12 flex flex-col gap-5">
+          <Link to="/shop" className="btn-shop w-full" tabIndex={open ? 0 : -1}>
+            Shop the Collection
+          </Link>
+          <Link to="/cart" className="btn-lux w-full" tabIndex={open ? 0 : -1}>
+            Cart{ready && count > 0 ? ` (${count})` : ""}
+          </Link>
+          <Link to="/coming-soon" className="btn-lux-gold w-full" tabIndex={open ? 0 : -1}>
             Notify Me
           </Link>
         </div>
