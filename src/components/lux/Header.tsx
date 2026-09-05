@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Logo } from "./Logo";
+import { useCart } from "@/lib/cart";
 
 
 const NAV = [
@@ -18,6 +19,7 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { count, ready } = useCart();
 
   // A single page-position observer controls visibility. It never uses scroll
   // direction: the home page watches its hero, while every other route watches
