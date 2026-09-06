@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { Logo } from "./Logo";
 import { useCart } from "@/lib/cart";
+import emblemAsset from "@/assets/odcorrect-emblem.png.asset.json";
 
 
 const NAV = [
@@ -106,21 +106,33 @@ export function Header() {
       }}
     >
       <div className="shell flex items-center justify-between py-5">
-       <Link
-  to="/"
-  aria-label="ODCORRECT home"
-  className="-ml-1 shrink-0 px-1 py-1 transition-all duration-1000"
->
-  <Logo
-    width={scrolled ? 124 : 145}
-    priority
-    className="transition-all duration-1000"
-    style={{
-      filter:
-        "contrast(1.32) saturate(1.2) brightness(1.12) drop-shadow(0 0 14px oklch(1 0 0 / 45%)) drop-shadow(0 0 34px oklch(1 0 0 / 28%))",
-    }}
-  />
-</Link>
+        <Link
+          to="/"
+          aria-label="ODCORRECT home"
+          className="-ml-1 shrink-0 px-1 py-1 transition-all duration-1000"
+        >
+          <span
+            className="flex items-center justify-center rounded-full transition-all duration-1000"
+            style={{
+              width: scrolled ? 40 : 46,
+              height: scrolled ? 40 : 46,
+              background: "linear-gradient(145deg, #ffffff 0%, #f2f2f2 60%, #e4e4e4 100%)",
+              boxShadow:
+                "inset 0 1px 2px oklch(1 0 0 / 90%), inset 0 -2px 4px oklch(0 0 0 / 8%), 0 2px 6px oklch(0 0 0 / 35%), 0 6px 18px oklch(0 0 0 / 28%)",
+            }}
+          >
+            <img
+              src={emblemAsset.url}
+              alt="ODCORRECT"
+              width={scrolled ? 30 : 35}
+              height={scrolled ? 30 : 35}
+              className="block rounded-full object-contain transition-all duration-1000"
+              style={{ width: "76%", height: "76%" }}
+              loading="eager"
+              decoding="async"
+            />
+          </span>
+        </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-10 lg:flex">
           {NAV.map((item) => (
