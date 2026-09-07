@@ -1,7 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
-import emblemAsset from "@/assets/odcorrect-emblem.png.asset.json";
 
 
 const NAV = [
@@ -122,7 +121,7 @@ export function Header() {
             }}
           >
             <img
-              src={emblemAsset.url}
+              src="/odcorrect-emblem.png"
               alt="ODCORRECT"
               width={scrolled ? 30 : 35}
               height={scrolled ? 30 : 35}
