@@ -1,7 +1,7 @@
 const LOGO_SRC = "/odcorrect-logo.png";
 
-const NATURAL_WIDTH = 1022;
-const NATURAL_HEIGHT = 603;
+const NATURAL_WIDTH = 1774;
+const NATURAL_HEIGHT = 887;
 
 interface LogoProps {
   className?: string;
